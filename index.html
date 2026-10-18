@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calqul – Simulateur 2086 crypto</title>
+<meta name="description" content="Simulez gratuitement votre formulaire 2086 (plus-values sur actifs numériques) et préparez votre 3916-bis. Calcul anonyme, dans votre navigateur.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A6B;--navy2:#0F2547;--blue:#2F80ED;--ice:#DCEBFF;
+  --bg:#F5F7FB;--card:#fff;--text:#14213D;--muted:#5B6782;--line:#E2E7F0;
+  --ok:#0F9D58;--err:#D93025;--warn:#B26A00;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,sans-serif}
+a{color:var(--blue)}
+header{background:linear-gradient(120deg,var(--navy2),var(--navy) 60%,#2a63b8);color:#fff}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:12px;font:700 22px Montserrat,sans-serif;letter-spacing:.06em;color:#fff;text-decoration:none}
+.nav nav a{color:#cfe0ff;text-decoration:none;margin-left:22px;font-size:14px}
+.hero{padding:44px 0 56px}
+.hero h1{font:700 clamp(28px,4vw,42px)/1.15 Montserrat,sans-serif;margin:0 0 14px;max-width:720px}
+.hero p{color:#cfe0ff;max-width:640px;margin:0 0 22px;font-size:17px}
+.badges{display:flex;flex-wrap:wrap;gap:10px}
+.badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:99px;font-size:13px}
+main{margin-top:-28px;padding-bottom:60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px;margin-bottom:22px;box-shadow:0 2px 10px rgba(20,33,61,.04)}
+.card h2{font:700 20px Montserrat,sans-serif;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+.step{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px}
+.sub{color:var(--muted);margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+label small{display:block;font-weight:400;color:var(--muted)}
+input,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff;color:var(--text)}
+input:focus,select:focus{outline:2px solid var(--ice);border-color:var(--blue)}
+.ops{width:100%;border-collapse:collapse;margin-top:6px}
+.ops th{font-size:12px;text-align:left;color:var(--muted);font-weight:600;padding:6px 6px;border-bottom:1px solid var(--line)}
+.ops td{padding:6px;vertical-align:top}
+.ops td:first-child select{min-width:110px}
+.ops tr.cess td{background:#FAFCFF}
+.ops td.na{color:#b5bdcc;text-align:center}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+button{font:600 14px Inter,sans-serif;border:0;border-radius:8px;padding:10px 16px;cursor:pointer}
+.b1{background:var(--navy);color:#fff}.b2{background:var(--ice);color:var(--navy)}
+.b3{background:none;color:var(--muted);padding:8px}.b3:hover{color:var(--err)}
+.scroll{overflow-x:auto}
+.err{color:var(--err);font-size:13px;margin-top:8px}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:20px}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:16px}
+.kpi span{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.kpi b{font:700 24px Montserrat,sans-serif}
+.kpi.main{background:var(--navy);color:#fff;border-color:var(--navy)}.kpi.main span{color:#cfe0ff}
+.note{background:#FFF8E6;border:1px solid #F3DFA8;color:#5c4400;border-radius:10px;padding:12px 14px;font-size:13.5px;margin:14px 0}
+.cession{border:1px solid var(--line);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.cession h3{margin:0;padding:10px 14px;background:#F0F4FA;font-size:14px}
+.lines{width:100%;border-collapse:collapse;font-size:13.5px}
+.lines td{padding:7px 14px;border-top:1px solid var(--line)}
+.lines td:first-child{width:56px;font-weight:700;color:var(--navy)}
+.lines td:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lines tr.res td{background:#EEF6FF;font-weight:700}
+.acc{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;position:relative}
+.acc .b3{position:absolute;top:8px;right:8px}
+.out{white-space:pre-wrap;background:#F0F4FA;border-radius:10px;padding:14px;font:13px/1.6 ui-monospace,Consolas,monospace}
+.faq details{border-top:1px solid var(--line);padding:12px 0}
+.faq summary{cursor:pointer;font-weight:600}
+footer{background:var(--navy2);color:#9fb3d6;font-size:13px;padding:28px 0}
+footer b{color:#fff}
+@media (max-width:640px){.nav nav{display:none}.card{padding:18px}}
+@media print{
+  header .hero,.nav nav,.no-print,footer,.btns,#ops-card,#params-card{display:none!important}
+  body{background:#fff}.card{box-shadow:none;border:0;padding:0}
+  .cession{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <a class="logo" href="#"><svg width="34" height="30" viewBox="0 0 34 30" aria-hidden="true"><path d="M0 0l8 7v16l-8 7z" fill="#fff"/><path d="M11 0l8 7v16l-8 7z" fill="#fff"/><path d="M34 0l-8 7v16l8 7z" fill="#DCEBFF"/></svg>CALQUL</a>
+      <nav><a href="#simulateur">Simulateur 2086</a><a href="#f3916">3916-bis</a><a href="#faq">FAQ</a></nav>
+    </div>
+    <div class="hero">
+      <h1>Simulez votre formulaire 2086 en quelques minutes</h1>
+      <p>Calculez vos plus-values sur cryptomonnaies selon la méthode officielle du prix moyen pondéré, obtenez les montants des lignes 211 à 224 et préparez votre déclaration 3916-bis.</p>
+      <div class="badges"><span class="badge">🔒 Anonyme, aucun compte</span><span class="badge">💻 Calcul dans votre navigateur</span><span class="badge">📄 Récapitulatif imprimable</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="simulateur">
+
+<section class="card" id="params-card">
+  <h2><span class="step">1</span>Paramètres</h2>
+  <p class="sub">Les montants « avant l'année » se trouvent sur votre 2086 de l'année précédente (lignes 220 et 221 de la dernière cession). Si c'est votre première déclaration, laissez-les à 0 et saisissez tous vos achats depuis le début.</p>
+  <div class="grid">
+    <div><label for="year">Année des cessions</label>
+      <select id="year"><option value="2025">2025 (déclaration 2026)</option><option value="2026">2026 (déclaration 2027)</option></select></div>
+    <div><label for="acq0">Prix total d'acquisition au 1er janvier<small>Total investi en € depuis le début</small></label><input id="acq0" type="number" min="0" step="0.01" value="0"></div>
+    <div><label for="imp0">Fractions déjà imputées au 1er janvier<small>Capital déjà « consommé » par les cessions passées</small></label><input id="imp0" type="number" min="0" step="0.01" value="0"></div>
+    <div><label for="regime">Mode d'imposition</label>
+      <select id="regime"><option value="pfu">Prélèvement forfaitaire unique (flat tax)</option><option value="bareme">Barème progressif (option)</option></select></div>
+    <div id="tmi-box" hidden><label for="tmi">Votre tranche marginale (TMI)</label>
+      <select id="tmi"><option value="0">0 %</option><option value="0.11">11 %</option><option value="0.30" selected>30 %</option><option value="0.41">41 %</option><option value="0.45">45 %</option></select></div>
+  </div>
+</section>
+
+<section class="card" id="ops-card">
+  <h2><span class="step">2</span>Vos opérations</h2>
+  <p class="sub"><b>Achat</b> : achat de crypto contre des euros (frais inclus). <b>Cession</b> : vente contre des euros ou paiement d'un bien/service en crypto. Les échanges crypto contre crypto ne sont pas imposables : ne les saisissez pas. La « valeur du portefeuille » est la valeur totale de <u>toutes</u> vos cryptos, sur toutes les plateformes, juste avant la cession.</p>
+  <div class="scroll">
+  <table class="ops">
+    <thead><tr><th>Type</th><th>Date</th><th>Montant achat (€)</th><th>Prix de cession (€)</th><th>Frais de cession (€)</th><th>Valeur du portefeuille (€)</th><th></th></tr></thead>
+    <tbody id="ops"></tbody>
+  </table>
+  </div>
+  <div class="btns">
+    <button class="b2" onclick="addOp('achat')">+ Achat</button>
+    <button class="b2" onclick="addOp('cession')">+ Cession</button>
+    <button class="b3" onclick="example()">Charger un exemple</button>
+    <button class="b3" onclick="resetAll()">Tout effacer</button>
+  </div>
+  <div id="errors" class="err"></div>
+</section>
+
+<section class="card" id="result-card">
+  <h2><span class="step">3</span>Résultat de la simulation</h2>
+  <p class="sub" id="res-sub"></p>
+  <div class="summary" id="summary"></div>
+  <div id="decl"></div>
+  <div id="cessions"></div>
+  <div class="btns"><button class="b1" onclick="window.print()">Imprimer / enregistrer en PDF</button></div>
+</section>
+
+<section class="card" id="f3916">
+  <h2><span class="step">4</span>Comptes à l'étranger (3916-bis)</h2>
+  <p class="sub">Tout compte d'actifs numériques ouvert, détenu, utilisé ou clos pendant l'année auprès d'une plateforme établie hors de France doit être déclaré, même s'il n'y a eu aucune vente. L'absence de déclaration peut entraîner une amende par compte. Les informations ci-dessous figurent dans les paramètres de votre compte ou les conditions générales de la plateforme.</p>
+  <div id="accounts"></div>
+  <div class="btns no-print"><button class="b2" onclick="addAcc()">+ Ajouter un compte</button></div>
+  <div id="acc-out"></div>
+</section>
+
+<section class="card faq" id="faq">
+  <h2>Questions fréquentes</h2>
+  <details><summary>Comment est calculée la plus-value ?</summary><p>Pour chaque cession : plus-value = prix de cession net − prix total d'acquisition net × (prix de cession ÷ valeur globale du portefeuille). C'est la formule de la ligne 224 du formulaire 2086. Après chaque cession, la part du capital utilisée (« fraction imputée ») est retirée pour les cessions suivantes.</p></details>
+  <details><summary>Où reporter le résultat ?</summary><p>Le total net est reporté sur la déclaration 2042-C : case 3AN en cas de plus-value, case 3BN en cas de moins-value. Le détail de chaque cession est reporté sur le formulaire 2086.</p></details>
+  <details><summary>Que se passe-t-il si mes ventes sont faibles ?</summary><p>Si le total des prix de cession de l'année ne dépasse pas 305 €, les plus-values sont exonérées. Cela ne dispense pas de déclarer vos comptes étrangers (3916-bis).</p></details>
+  <details><summary>Les moins-values sont-elles reportables ?</summary><p>Non. Une moins-value nette sur actifs numériques ne s'impute que sur les plus-values de même nature de la même année ; elle n'est pas reportable sur les années suivantes.</p></details>
+  <details><summary>Mes données sont-elles envoyées quelque part ?</summary><p>Non. Le calcul est réalisé dans votre navigateur. Vos saisies sont seulement gardées sur votre appareil pour ne pas les perdre en rechargeant la page.</p></details>
+</section>
+
+<div class="note"><b>Avertissement.</b> Calqul est un outil de simulation fourni à titre informatif. Il ne constitue ni un conseil fiscal ou juridique, ni une déclaration officielle. Les résultats dépendent entièrement des informations que vous saisissez. Les taux utilisés sont indicatifs et doivent être vérifiés sur impots.gouv.fr. En cas de situation complexe (minage, staking, DeFi, activité habituelle), consultez un professionnel.</div>
+</main>
+
+<footer><div class="wrap"><b>CALQUL</b> · Simulateur indépendant, non affilié à l'administration fiscale. Vous restez seul responsable de votre déclaration.</div></footer>
+
+<script>
+// Prélèvements sociaux par année de cession (indicatif, à vérifier chaque année)
+const RATES = { 2025:{ir:0.128, ps:0.172}, 2026:{ir:0.128, ps:0.186} };
+const EXEMPT = 305;
+const $ = id => document.getElementById(id);
+const eur = n => (Math.round(n)).toLocaleString('fr-FR') + ' €';
+const num = v => { const n = parseFloat(String(v).replace(',', '.')); return isFinite(n) ? n : 0; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+let ops = [], accs = [];
+
+function save(){
+  try{ localStorage.setItem('calqul', JSON.stringify({ops, accs,
+    p:{year:$('year').value, acq0:$('acq0').value, imp0:$('imp0').value, regime:$('regime').value, tmi:$('tmi').value}})); }catch(e){}
+}
+function load(){
+  try{
+    const d = JSON.parse(localStorage.getItem('calqul') || 'null'); if(!d) return;
+    ops = d.ops || []; accs = d.accs || [];
+    for(const k in d.p) if($(k)) $(k).value = d.p[k];
+  }catch(e){}
+}
+
+function renderOps(){
+  $('ops').innerHTML = ops.map((o,i) => {
+    const f = (k,ph) => `<input type="number" min="0" step="0.01" value="${esc(o[k]||'')}" placeholder="${ph}" oninput="ops[${i}].${k}=this.value;calc()">`;
+    const isC = o.type === 'cession';
+    return `<tr class="${isC?'cess':''}">
+      <td><select onchange="ops[${i}].type=this.value;renderOps();calc()"><option value="achat"${!isC?' selected':''}>Achat</option><option value="cession"${isC?' selected':''}>Cession</option></select></td>
+      <td><input type="date" value="${esc(o.date||'')}" oninput="ops[${i}].date=this.value;calc()"></td>
+      ${isC ? `<td class="na">—</td><td>${f('prix','0')}</td><td>${f('frais','0')}</td><td>${f('valeur','0')}</td>`
+            : `<td>${f('montant','0')}</td><td class="na">—</td><td class="na">—</td><td class="na">—</td>`}
+      <td><button class="b3" title="Supprimer" onclick="ops.splice(${i},1);renderOps();calc()">✕</button></td></tr>`;
+  }).join('') || '<tr><td colspan="7" style="color:var(--muted);padding:14px 6px">Aucune opération. Ajoutez vos achats et cessions de l\'année.</td></tr>';
+}
+function addOp(type){ ops.push({type, date:'', montant:'', prix:'', frais:'', valeur:''}); renderOps(); calc(); }
+
+function calc(){
+  const year = $('year').value, R = RATES[year];
+  $('tmi-box').hidden = $('regime').value !== 'bareme';
+  let acq = num($('acq0').value), imp = num($('imp0').value);
+  const errs = [], rows = [];
+  // Ordre chronologique ; à date égale, les achats passent avant les cessions
+  const sorted = ops.map((o,i)=>({...o,i})).sort((a,b) =>
+    (a.date||'9999').localeCompare(b.date||'9999') || (a.type==='achat'?-1:1) - (b.type==='achat'?-1:1));
+
+  for(const o of sorted){
+    const n = o.i + 1;
+    if(o.date && !o.date.startsWith(year)) errs.push(`Ligne ${n} : la date n'est pas en ${year}.`);
+    if(o.type === 'achat'){ acq += num(o.montant); continue; }
+    const p = num(o.prix), fr = num(o.frais), v = num(o.valeur);
+    if(!p) continue;
+    if(!o.date) errs.push(`Ligne ${n} : date de cession manquante.`);
+    if(v < p){ errs.push(`Ligne ${n} : la valeur du portefeuille doit être au moins égale au prix de cession.`); continue; }
+    const net = acq - imp;
+    const frac = net * p / v;
+    const pv = (p - fr) - frac;
+    rows.push({date:o.date, v, p, fr, acq, imp, net, pv});
+    imp += frac;
+  }
+  $('errors').innerHTML = errs.map(esc).join('<br>');
+
+  const totalCess = rows.reduce((s,r)=>s+r.p, 0);
+  const totalPV = rows.reduce((s,r)=>s+r.pv, 0);
+  const exempt = totalCess > 0 && totalCess <= EXEMPT;
+  const base = (!exempt && totalPV > 0) ? totalPV : 0;
+  const irRate = $('regime').value === 'pfu' ? R.ir : num($('tmi').value);
+  const ir = base * irRate, ps = base * R.ps;
+
+  $('res-sub').textContent = rows.length
+    ? `${rows.length} cession(s) en ${year}. Taux appliqués : impôt ${(irRate*100).toFixed(1).replace('.0','')} % + prélèvements sociaux ${(R.ps*100).toFixed(1).replace('.0','')} % (indicatif).`
+    : 'Ajoutez au moins une cession pour voir le résultat.';
+
+  $('summary').innerHTML = rows.length ? `
+    <div class="kpi"><span>Total des cessions</span><b>${eur(totalCess)}</b></div>
+    <div class="kpi"><span>${totalPV>=0?'Plus-value nette':'Moins-value nette'}</span><b>${eur(Math.abs(totalPV))}</b></div>
+    <div class="kpi"><span>Impôt sur le revenu</span><b>${eur(ir)}</b></div>
+    <div class="kpi main"><span>Total estimé à payer</span><b>${eur(ir+ps)}</b></div>` : '';
+
+  let decl = '';
+  if(rows.length){
+    if(exempt) decl = `<div class="note">Total des cessions ≤ ${EXEMPT} € : plus-values exonérées. Vous n'avez pas d'impôt à payer sur ces cessions.</div>`;
+    else if(totalPV >= 0) decl = `<div class="note">À reporter sur la déclaration 2042-C : <b>case 3AN = ${eur(totalPV)}</b>. Joignez le formulaire 2086 avec le détail ci-dessous.</div>`;
+    else decl = `<div class="note">À reporter sur la déclaration 2042-C : <b>case 3BN = ${eur(-totalPV)}</b>. Cette moins-value n'est pas reportable sur les années suivantes.</div>`;
+  }
+  $('decl').innerHTML = decl;
+
+  $('cessions').innerHTML = rows.map((r,k) => {
+    const L = [
+      ['211','Valeur globale du portefeuille au moment de la cession', r.v],
+      ['212','Prix de cession', r.p],
+      ['213','Frais de cession', r.fr],
+      ['214','Prix de cession net des frais', r.p - r.fr],
+      ['215','Soulte reçue ou versée', 0],
+      ['216','Prix de cession net des soultes', r.p],
+      ['217','Prix de cession net des frais et soultes', r.p - r.fr],
+      ['220','Prix total d\'acquisition', r.acq],
+      ['221','Fractions de capital initial déjà imputées', r.imp],
+      ['222','Soultes reçues lors d\'échanges antérieurs', 0],
+      ['223','Prix total d\'acquisition net', r.net],
+    ];
+    return `<div class="cession"><h3>Cession n° ${k+1}${r.date ? ' — ' + r.date.split('-').reverse().join('/') : ''}</h3>
+      <table class="lines">${L.map(l=>`<tr><td>${l[0]}</td><td>${l[1]}</td><td>${eur(l[2])}</td></tr>`).join('')}
+      <tr class="res"><td>224</td><td>${r.pv>=0?'Plus-value':'Moins-value'}</td><td>${r.pv<0?'− ':''}${eur(Math.abs(r.pv))}</td></tr></table></div>`;
+  }).join('');
+  save();
+}
+
+function renderAccs(){
+  const fields = [['nom','Nom de la plateforme','ex. Binance'],['pays','Pays d\'établissement',''],['adresse','Adresse de la plateforme',''],
+    ['id','Identifiant / email du compte',''],['ouverture','Date d\'ouverture','date'],['cloture','Date de clôture (si clos)','date']];
+  $('accounts').innerHTML = accs.map((a,i) => `<div class="acc"><button class="b3 no-print" onclick="accs.splice(${i},1);renderAccs()">✕</button>
+    <div class="grid">${fields.map(([k,l,ph]) => `<div><label>${l}</label><input ${ph==='date'?'type="date"':`placeholder="${ph}"`} value="${esc(a[k]||'')}" oninput="accs[${i}].${k}=this.value;outAccs()"></div>`).join('')}</div></div>`).join('');
+  outAccs();
+}
+function addAcc(){ accs.push({}); renderAccs(); }
+function outAccs(){
+  const list = accs.filter(a => a.nom);
+  $('acc-out').innerHTML = list.length ? `<p class="sub" style="margin-top:16px">Récapitulatif à recopier dans le formulaire 3916-bis (un formulaire par compte) et cochez la <b>case 8UU</b> de la déclaration 2042 :</p>
+    <div class="out">${list.map((a,k)=>esc(`Compte ${k+1}
+  Désignation du gestionnaire : ${a.nom}
+  Pays : ${a.pays||'—'}
+  Adresse : ${a.adresse||'—'}
+  Identifiant du compte : ${a.id||'—'}
+  Date d'ouverture : ${a.ouverture?a.ouverture.split('-').reverse().join('/'):'—'}
+  Date de clôture : ${a.cloture?a.cloture.split('-').reverse().join('/'):'—'}
+  Usage : personnel`)).join('\n\n')}</div>` : '';
+  save();
+}
+
+function example(){
+  $('year').value = '2025'; $('acq0').value = 0; $('imp0').value = 0;
+  ops = [
+    {type:'achat', date:'2025-01-10', montant:'2000'},
+    {type:'achat', date:'2025-03-05', montant:'1000'},
+    {type:'cession', date:'2025-06-20', prix:'1500', frais:'15', valeur:'5000'},
+    {type:'cession', date:'2025-11-02', prix:'1000', frais:'10', valeur:'4200'},
+  ];
+  renderOps(); calc();
+}
+function resetAll(){
+  if(!confirm('Effacer toutes les saisies ?')) return;
+  ops = []; accs = []; $('acq0').value = 0; $('imp0').value = 0; renderOps(); renderAccs(); calc();
+}
+
+['year','acq0','imp0','regime','tmi'].forEach(id => $(id).addEventListener('input', calc));
+load(); renderOps(); renderAccs(); calc();
+</script>
+</body>
+</html>
