@@ -4,306 +4,556 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calqul – Simulateur 2086 crypto</title>
-<meta name="description" content="Simulez gratuitement votre formulaire 2086 (plus-values sur actifs numériques) et préparez votre 3916-bis. Calcul anonyme, dans votre navigateur.">
+<meta name="description" content="Simulez gratuitement votre formulaire 2086 (plus-values crypto) et préparez votre 3916-bis. Simple, anonyme, calcul dans votre navigateur.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#1B3A6B;--navy2:#0F2547;--blue:#2F80ED;--ice:#DCEBFF;
-  --bg:#F5F7FB;--card:#fff;--text:#14213D;--muted:#5B6782;--line:#E2E7F0;
-  --ok:#0F9D58;--err:#D93025;--warn:#B26A00;
+  --navy:#0E2A55;--navy2:#071A38;--blue:#2F7BF6;--blue2:#5AA2FF;--ice:#E7F0FF;--ice2:#F3F7FF;
+  --bg:#F6F8FC;--card:#fff;--text:#0D1B33;--muted:#5E6B85;--line:#E3E8F2;
+  --ok:#12A150;--okbg:#E8F7EE;--err:#D93025;--r:20px;
+  --sh:0 1px 2px rgba(13,27,51,.04),0 8px 30px rgba(13,27,51,.06);
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,sans-serif}
-a{color:var(--blue)}
-header{background:linear-gradient(120deg,var(--navy2),var(--navy) 60%,#2a63b8);color:#fff}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-.logo{display:flex;align-items:center;gap:12px;font:700 22px Montserrat,sans-serif;letter-spacing:.06em;color:#fff;text-decoration:none}
-.nav nav a{color:#cfe0ff;text-decoration:none;margin-left:22px;font-size:14px}
-.hero{padding:44px 0 56px}
-.hero h1{font:700 clamp(28px,4vw,42px)/1.15 Montserrat,sans-serif;margin:0 0 14px;max-width:720px}
-.hero p{color:#cfe0ff;max-width:640px;margin:0 0 22px;font-size:17px}
-.badges{display:flex;flex-wrap:wrap;gap:10px}
-.badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:99px;font-size:13px}
-main{margin-top:-28px;padding-bottom:60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px;margin-bottom:22px;box-shadow:0 2px 10px rgba(20,33,61,.04)}
-.card h2{font:700 20px Montserrat,sans-serif;margin:0 0 6px;display:flex;align-items:center;gap:10px}
-.step{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px}
-.sub{color:var(--muted);margin:0 0 18px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
-label small{display:block;font-weight:400;color:var(--muted)}
-input,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff;color:var(--text)}
-input:focus,select:focus{outline:2px solid var(--ice);border-color:var(--blue)}
-.ops{width:100%;border-collapse:collapse;margin-top:6px}
-.ops th{font-size:12px;text-align:left;color:var(--muted);font-weight:600;padding:6px 6px;border-bottom:1px solid var(--line)}
-.ops td{padding:6px;vertical-align:top}
-.ops td:first-child select{min-width:110px}
-.ops tr.cess td{background:#FAFCFF}
-.ops td.na{color:#b5bdcc;text-align:center}
-.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-button{font:600 14px Inter,sans-serif;border:0;border-radius:8px;padding:10px 16px;cursor:pointer}
-.b1{background:var(--navy);color:#fff}.b2{background:var(--ice);color:var(--navy)}
-.b3{background:none;color:var(--muted);padding:8px}.b3:hover{color:var(--err)}
-.scroll{overflow-x:auto}
-.err{color:var(--err);font-size:13px;margin-top:8px}
-.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:20px}
-.kpi{border:1px solid var(--line);border-radius:12px;padding:16px}
-.kpi span{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-.kpi b{font:700 24px Montserrat,sans-serif}
-.kpi.main{background:var(--navy);color:#fff;border-color:var(--navy)}.kpi.main span{color:#cfe0ff}
-.note{background:#FFF8E6;border:1px solid #F3DFA8;color:#5c4400;border-radius:10px;padding:12px 14px;font-size:13.5px;margin:14px 0}
-.cession{border:1px solid var(--line);border-radius:12px;margin-bottom:14px;overflow:hidden}
-.cession h3{margin:0;padding:10px 14px;background:#F0F4FA;font-size:14px}
-.lines{width:100%;border-collapse:collapse;font-size:13.5px}
-.lines td{padding:7px 14px;border-top:1px solid var(--line)}
-.lines td:first-child{width:56px;font-weight:700;color:var(--navy)}
-.lines td:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.lines tr.res td{background:#EEF6FF;font-weight:700}
-.acc{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;position:relative}
-.acc .b3{position:absolute;top:8px;right:8px}
-.out{white-space:pre-wrap;background:#F0F4FA;border-radius:10px;padding:14px;font:13px/1.6 ui-monospace,Consolas,monospace}
-.faq details{border-top:1px solid var(--line);padding:12px 0}
-.faq summary{cursor:pointer;font-weight:600}
-footer{background:var(--navy2);color:#9fb3d6;font-size:13px;padding:28px 0}
-footer b{color:#fff}
-@media (max-width:640px){.nav nav{display:none}.card{padding:18px}}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Plus Jakarta Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+h1,h2,h3{letter-spacing:-.02em;line-height:1.15}
+button{font:inherit;cursor:pointer}
+
+/* Header */
+.top{position:sticky;top:0;z-index:20;background:rgba(7,26,56,.85);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:11px;font:800 21px Montserrat,sans-serif;letter-spacing:.07em;color:#fff;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:26px}
+.nav-links a{color:#C6D6F2;text-decoration:none;font-size:14.5px;font-weight:500}
+.nav-links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:13px 22px;font-weight:700;font-size:15px;text-decoration:none;transition:.18s}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 6px 20px rgba(47,123,246,.35)}
+.btn-primary:hover{background:#1F6AE6;transform:translateY(-1px)}
+.btn-ghost{background:var(--ice);color:var(--navy)}
+.btn-ghost:hover{background:#d9e7ff}
+.btn-white{background:#fff;color:var(--navy)}
+.btn-sm{padding:9px 15px;font-size:14px;border-radius:10px}
+.nav .btn{padding:9px 16px;font-size:14px}
+
+/* Hero */
+.hero{background:radial-gradient(1200px 500px at 85% -10%,#2A6BD8 0%,transparent 60%),radial-gradient(800px 400px at 0% 100%,#123B7A 0%,transparent 60%),var(--navy2);color:#fff;padding:70px 0 120px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:6px 14px 6px 8px;border-radius:99px;font-size:13.5px;color:#D6E4FF;margin-bottom:22px}
+.pill b{background:var(--blue);color:#fff;border-radius:99px;padding:2px 9px;font-size:12px}
+.hero h1{font:800 clamp(34px,5vw,56px)/1.05 Montserrat,sans-serif;margin:0 0 20px}
+.hero h1 span{background:linear-gradient(90deg,#8FC1FF,#DCEBFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:18.5px;color:#C6D6F2;max-width:540px;margin:0 0 30px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero-cta small{color:#9FB5DA;font-size:13.5px}
+.trust{display:flex;flex-wrap:wrap;gap:22px;margin-top:36px;color:#B7C9EA;font-size:14px}
+.trust span{display:flex;align-items:center;gap:8px}
+.mock{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:22px;backdrop-filter:blur(10px);box-shadow:0 30px 80px rgba(0,0,0,.35);transform:rotate(1.5deg)}
+.mock-card{background:#fff;color:var(--text);border-radius:16px;padding:20px}
+.mock-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.mock-row span{color:var(--muted)}
+.mock-big{margin-top:14px;background:var(--navy);color:#fff;border-radius:14px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center}
+.mock-big b{font:800 26px Montserrat,sans-serif}
+.mock-tag{display:inline-block;background:var(--okbg);color:var(--ok);font-weight:700;font-size:12px;padding:4px 10px;border-radius:99px;margin-bottom:10px}
+
+/* How it works */
+.how{margin-top:-70px;position:relative;z-index:2}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.how-item{background:#fff;border-radius:var(--r);padding:24px;box-shadow:var(--sh);border:1px solid var(--line)}
+.how-ico{width:46px;height:46px;border-radius:14px;background:var(--ice);display:grid;place-items:center;font-size:22px;margin-bottom:14px}
+.how-item h3{margin:0 0 6px;font-size:17px}
+.how-item p{margin:0;color:var(--muted);font-size:14.5px}
+
+/* Section */
+section.block{padding:80px 0 0}
+.sec-head{text-align:center;max-width:640px;margin:0 auto 34px}
+.sec-head .eyebrow{color:var(--blue);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.1em}
+.sec-head h2{font:800 clamp(26px,3.4vw,38px) Montserrat,sans-serif;margin:8px 0 10px}
+.sec-head p{color:var(--muted);margin:0}
+
+/* Simulator */
+.sim{display:grid;grid-template-columns:1fr 330px;gap:24px;align-items:start}
+.panel{background:#fff;border-radius:24px;box-shadow:var(--sh);border:1px solid var(--line);overflow:hidden}
+.stepper{display:flex;border-bottom:1px solid var(--line);background:var(--ice2)}
+.stepper button{flex:1;border:0;background:none;padding:16px 8px;display:flex;align-items:center;justify-content:center;gap:9px;color:var(--muted);font-weight:600;font-size:14px;position:relative}
+.stepper button i{font-style:normal;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1.5px solid var(--line);font-size:13px;font-weight:700}
+.stepper button.on{color:var(--navy)}
+.stepper button.on i{background:var(--blue);border-color:var(--blue);color:#fff}
+.stepper button.done i{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.stepper button.on::after{content:"";position:absolute;left:12%;right:12%;bottom:-1px;height:3px;border-radius:3px;background:var(--blue)}
+.pane{display:none;padding:32px;animation:fade .25s ease}
+.pane.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pane h3{font-size:22px;margin:0 0 6px}
+.pane .hint{color:var(--muted);margin:0 0 24px;font-size:15px}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+.choice label{border:1.5px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;transition:.15s}
+.choice label:hover{border-color:#C3D5F5}
+.choice input{margin-top:4px;accent-color:var(--blue)}
+.choice label:has(input:checked){border-color:var(--blue);background:var(--ice2)}
+.choice b{display:block;font-size:15px}
+.choice small{color:var(--muted);font-size:13.5px}
+.field{margin-bottom:16px}
+.field label{display:flex;align-items:center;gap:6px;font-weight:600;font-size:14px;margin-bottom:7px}
+.tip{position:relative;display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--ice);color:var(--blue);font-size:11px;font-weight:800;cursor:help}
+.tip:hover::after,.tip:focus::after{content:attr(data-t);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);width:250px;background:var(--navy);color:#fff;font-weight:500;font-size:12.5px;line-height:1.45;padding:10px 12px;border-radius:10px;z-index:5;box-shadow:var(--sh)}
+.inp{position:relative}
+.inp input,.inp select{width:100%;height:50px;padding:0 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:16px;background:#fff;color:var(--text);transition:.15s}
+.inp.eur input{padding-right:38px}
+.inp.eur::after{content:"€";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:600}
+.inp input:focus,.inp select:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(47,123,246,.12)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.items{display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
+.item{border:1.5px solid var(--line);border-radius:16px;padding:18px 18px 4px;position:relative;background:#fff}
+.item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.item-head b{font-size:14px;color:var(--navy);display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--blue)}
+.del{border:0;background:none;color:var(--muted);font-size:13px;font-weight:600;padding:4px 8px;border-radius:8px}
+.del:hover{background:#FDECEA;color:var(--err)}
+.add{width:100%;border:1.5px dashed #C3D5F5;background:var(--ice2);color:var(--blue);border-radius:14px;padding:15px;font-weight:700;font-size:15px;transition:.15s}
+.add:hover{background:var(--ice);border-color:var(--blue)}
+.empty{text-align:center;color:var(--muted);padding:26px;border:1.5px dashed var(--line);border-radius:16px;font-size:14.5px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px 32px;border-top:1px solid var(--line);background:var(--ice2)}
+.link{border:0;background:none;color:var(--muted);font-weight:600;font-size:14px}
+.link:hover{color:var(--navy)}
+.err{background:#FDECEA;color:#A1271C;border-radius:12px;padding:12px 14px;font-size:14px;margin-top:6px}
+.err:empty{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:7px 14px;font-size:14px;font-weight:600;color:var(--navy)}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+
+/* Side summary */
+.side{position:sticky;top:90px;display:flex;flex-direction:column;gap:16px}
+.live{background:linear-gradient(160deg,var(--navy) 0%,#163E7C 100%);color:#fff;border-radius:24px;padding:24px;box-shadow:0 20px 50px rgba(14,42,85,.25)}
+.live small{color:#A9C0E8;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.live .big{font:800 40px Montserrat,sans-serif;margin:4px 0 16px}
+.live-row{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid rgba(255,255,255,.12);font-size:14.5px}
+.live-row span{color:#C6D6F2}
+.live-badge{display:inline-block;margin-top:14px;background:rgba(18,161,80,.18);color:#7BE3A6;font-size:13px;font-weight:700;padding:6px 12px;border-radius:99px}
+.safe{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;font-size:14px;color:var(--muted);display:flex;gap:12px}
+.safe b{color:var(--text)}
+
+/* Result */
+.res-hero{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.kpi{border:1.5px solid var(--line);border-radius:16px;padding:16px}
+.kpi span{font-size:13px;color:var(--muted);font-weight:600}
+.kpi b{display:block;font:800 24px Montserrat,sans-serif;margin-top:2px}
+.kpi.hl{background:var(--navy);border-color:var(--navy);color:#fff}.kpi.hl span{color:#A9C0E8}
+.boxes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.box{background:var(--ice2);border:1.5px solid #D4E3FF;border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px}
+.box .code{background:var(--blue);color:#fff;font:800 16px Montserrat,sans-serif;border-radius:10px;padding:10px 12px;min-width:62px;text-align:center}
+.box span{font-size:13px;color:var(--muted)}
+.box b{display:block;font-size:20px}
+.banner{border-radius:16px;padding:16px 18px;font-size:15px;margin-bottom:20px;display:flex;gap:12px}
+.banner.ok{background:var(--okbg);color:#0B6B36}
+.banner.info{background:#FFF7E6;color:#6B4A00}
+details.ces{border:1.5px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden}
+details.ces summary{list-style:none;cursor:pointer;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:15px}
+details.ces summary::-webkit-details-marker{display:none}
+details.ces summary em{font-style:normal;font-size:13px;color:var(--muted);font-weight:500;margin-left:8px}
+details.ces summary .pv{font-variant-numeric:tabular-nums}
+details.ces summary .pv.pos{color:var(--ok)}details.ces summary .pv.neg{color:var(--err)}
+details.ces[open] summary{background:var(--ice2);border-bottom:1px solid var(--line)}
+.lines{width:100%;border-collapse:collapse;font-size:14px}
+.lines td{padding:9px 18px;border-bottom:1px solid var(--line)}
+.lines tr:last-child td{border-bottom:0}
+.lines td:first-child{width:60px}
+.lines td:first-child span{background:var(--ice);color:var(--blue);font-weight:800;font-size:12.5px;padding:3px 8px;border-radius:6px}
+.lines td:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+.lines tr.res td{background:#F1F7FF;font-weight:800}
+.out{white-space:pre-wrap;background:var(--ice2);border:1.5px solid #D4E3FF;border-radius:14px;padding:16px;font:13.5px/1.7 ui-monospace,Consolas,monospace;margin-top:4px}
+
+/* Features / FAQ */
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feat div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;box-shadow:var(--sh)}
+.feat h3{font-size:17px;margin:12px 0 6px}
+.feat p{margin:0;color:var(--muted);font-size:14.5px}
+.faq{max-width:780px;margin:0 auto}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:16px;padding:0 22px;margin-bottom:10px}
+.faq summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:700;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--blue);font-size:22px;line-height:1;transition:.2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:0 0 18px;color:var(--muted)}
+.cta{margin:80px 0 0;background:radial-gradient(600px 300px at 90% 0%,#2A6BD8,transparent 60%),var(--navy2);color:#fff;border-radius:28px;padding:50px;display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.cta h2{font:800 30px Montserrat,sans-serif;margin:0 0 6px}
+.cta p{margin:0;color:#C6D6F2}
+.legal{max-width:780px;margin:40px auto 0;text-align:center;color:var(--muted);font-size:13px}
+footer{margin-top:60px;border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media (max-width:960px){
+  .hero-grid,.sim{grid-template-columns:1fr}
+  .mock{display:none}
+  .side{position:static}
+  .how-grid,.feat{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .nav-links a{display:none}
+  .hero{padding:44px 0 100px}
+  .pane{padding:22px 18px}.foot{padding:16px 18px}.foot .link[onclick]{display:none}
+  .stepper button span{display:none}
+  .choice,.row2,.row3,.res-hero,.boxes{grid-template-columns:1fr}
+  .cta{padding:30px 22px}
+}
 @media print{
-  header .hero,.nav nav,.no-print,footer,.btns,#ops-card,#params-card{display:none!important}
-  body{background:#fff}.card{box-shadow:none;border:0;padding:0}
-  .cession{break-inside:avoid}
+  .top,.hero,.how,.no-print,.stepper,.foot,.side,#features,#faq,.cta,footer,.sec-head{display:none!important}
+  body{background:#fff}.panel{box-shadow:none;border:0}
+  .pane{display:none!important}.pane[data-s="4"]{display:block!important;padding:0}
+  details.ces{break-inside:avoid}details.ces .lines{display:table}
 }
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <div class="nav">
-      <a class="logo" href="#"><svg width="34" height="30" viewBox="0 0 34 30" aria-hidden="true"><path d="M0 0l8 7v16l-8 7z" fill="#fff"/><path d="M11 0l8 7v16l-8 7z" fill="#fff"/><path d="M34 0l-8 7v16l8 7z" fill="#DCEBFF"/></svg>CALQUL</a>
-      <nav><a href="#simulateur">Simulateur 2086</a><a href="#f3916">3916-bis</a><a href="#faq">FAQ</a></nav>
+
+<div class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#"><svg width="32" height="28" viewBox="0 0 34 30" aria-hidden="true"><path d="M0 0l8 7v16l-8 7z" fill="#fff"/><path d="M11 0l8 7v16l-8 7z" fill="#fff"/><path d="M34 0l-8 7v16l8 7z" fill="#BFD9FF"/></svg>CALQUL</a>
+    <div class="nav-links"><a href="#comment">Comment ça marche</a><a href="#faq">FAQ</a><a class="btn btn-primary" href="#simulateur">Simuler</a></div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="pill"><b>Gratuit</b> Déclaration des revenus 2025</div>
+      <h1>Votre formulaire 2086, <span>enfin simple.</span></h1>
+      <p class="lead">Saisissez vos achats et ventes de crypto. Calqul calcule votre plus-value selon la méthode officielle et vous indique exactement quoi reporter dans votre déclaration.</p>
+      <div class="hero-cta"><a class="btn btn-primary" href="#simulateur">Commencer la simulation →</a><small>Environ 5 minutes · sans inscription</small></div>
+      <div class="trust"><span>🔒 100 % anonyme</span><span>💻 Calcul dans votre navigateur</span><span>📄 Récapitulatif PDF</span></div>
     </div>
-    <div class="hero">
-      <h1>Simulez votre formulaire 2086 en quelques minutes</h1>
-      <p>Calculez vos plus-values sur cryptomonnaies selon la méthode officielle du prix moyen pondéré, obtenez les montants des lignes 211 à 224 et préparez votre déclaration 3916-bis.</p>
-      <div class="badges"><span class="badge">🔒 Anonyme, aucun compte</span><span class="badge">💻 Calcul dans votre navigateur</span><span class="badge">📄 Récapitulatif imprimable</span></div>
+    <div class="mock" aria-hidden="true">
+      <div class="mock-card">
+        <span class="mock-tag">✓ Calcul terminé</span>
+        <div class="mock-row"><span>Total des ventes</span><b>2 500 €</b></div>
+        <div class="mock-row"><span>Plus-value nette</span><b>1 075 €</b></div>
+        <div class="mock-row"><span>Case à remplir</span><b>3AN</b></div>
+        <div class="mock-big"><span>Impôt estimé</span><b>323 €</b></div>
+      </div>
     </div>
   </div>
 </header>
 
-<main class="wrap" id="simulateur">
+<div class="wrap how" id="comment">
+  <div class="how-grid">
+    <div class="how-item"><div class="how-ico">🛒</div><h3>1. Vos achats</h3><p>Indiquez combien d'euros vous avez investi en crypto, et quand.</p></div>
+    <div class="how-item"><div class="how-ico">💶</div><h3>2. Vos ventes</h3><p>Pour chaque vente en euros : le montant reçu et la valeur de votre portefeuille.</p></div>
+    <div class="how-item"><div class="how-ico">✅</div><h3>3. Votre résultat</h3><p>Plus-value, impôt estimé, et les cases exactes à remplir sur impots.gouv.fr.</p></div>
+  </div>
+</div>
 
-<section class="card" id="params-card">
-  <h2><span class="step">1</span>Paramètres</h2>
-  <p class="sub">Les montants « avant l'année » se trouvent sur votre 2086 de l'année précédente (lignes 220 et 221 de la dernière cession). Si c'est votre première déclaration, laissez-les à 0 et saisissez tous vos achats depuis le début.</p>
-  <div class="grid">
-    <div><label for="year">Année des cessions</label>
-      <select id="year"><option value="2025">2025 (déclaration 2026)</option><option value="2026">2026 (déclaration 2027)</option></select></div>
-    <div><label for="acq0">Prix total d'acquisition au 1er janvier<small>Total investi en € depuis le début</small></label><input id="acq0" type="number" min="0" step="0.01" value="0"></div>
-    <div><label for="imp0">Fractions déjà imputées au 1er janvier<small>Capital déjà « consommé » par les cessions passées</small></label><input id="imp0" type="number" min="0" step="0.01" value="0"></div>
-    <div><label for="regime">Mode d'imposition</label>
-      <select id="regime"><option value="pfu">Prélèvement forfaitaire unique (flat tax)</option><option value="bareme">Barème progressif (option)</option></select></div>
-    <div id="tmi-box" hidden><label for="tmi">Votre tranche marginale (TMI)</label>
-      <select id="tmi"><option value="0">0 %</option><option value="0.11">11 %</option><option value="0.30" selected>30 %</option><option value="0.41">41 %</option><option value="0.45">45 %</option></select></div>
+<section class="block" id="simulateur">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Simulateur</div><h2>Calculez votre plus-value crypto</h2><p>Vos données restent sur votre appareil. Rien n'est envoyé.</p></div>
+
+    <div class="sim">
+      <div class="panel">
+        <div class="stepper" id="stepper">
+          <button data-go="1"><i>1</i><span>Situation</span></button>
+          <button data-go="2"><i>2</i><span>Achats</span></button>
+          <button data-go="3"><i>3</i><span>Ventes</span></button>
+          <button data-go="4"><i>4</i><span>Résultat</span></button>
+          <button data-go="5"><i>5</i><span>Comptes</span></button>
+        </div>
+
+        <!-- 1. Situation -->
+        <div class="pane" data-s="1">
+          <h3>Votre situation</h3>
+          <p class="hint">Quelques questions pour adapter le calcul.</p>
+          <div class="field"><label>Année de vos ventes</label>
+            <div class="inp"><select id="year"><option value="2025">2025 — déclaration au printemps 2026</option><option value="2026">2026 — déclaration au printemps 2027</option></select></div></div>
+          <div class="field"><label>Est-ce votre première déclaration crypto ?</label></div>
+          <div class="choice">
+            <label><input type="radio" name="first" value="1" checked><span><b>Oui</b><small>Je n'ai jamais rempli de 2086</small></span></label>
+            <label><input type="radio" name="first" value="0"><span><b>Non</b><small>J'ai déjà déclaré des ventes</small></span></label>
+          </div>
+          <div id="prev" hidden>
+            <div class="row2">
+              <div class="field"><label>Prix total d'acquisition <span class="tip" tabindex="0" data-t="Ligne 220 de la dernière vente de votre 2086 de l'an dernier, plus vos achats faits après cette vente et avant le 1er janvier.">?</span></label><div class="inp eur"><input id="acq0" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"></div></div>
+              <div class="field"><label>Capital déjà utilisé <span class="tip" tabindex="0" data-t="Ligne 221 de votre dernière vente, plus la fraction de capital utilisée par cette vente (ligne 223 × 216 ÷ 211).">?</span></label><div class="inp eur"><input id="imp0" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"></div></div>
+            </div>
+          </div>
+          <div class="field"><label>Comment souhaitez-vous être imposé ? <span class="tip" tabindex="0" data-t="Par défaut, c'est la flat tax. L'option pour le barème s'applique à tous vos revenus de placement de l'année : elle n'est intéressante que si votre tranche est à 0 % ou 11 %.">?</span></label></div>
+          <div class="choice">
+            <label><input type="radio" name="regime" value="pfu" checked><span><b>Flat tax</b><small>Taux fixe, le cas le plus courant</small></span></label>
+            <label><input type="radio" name="regime" value="bareme"><span><b>Barème progressif</b><small>Selon votre tranche d'imposition</small></span></label>
+          </div>
+          <div class="field" id="tmi-box" hidden><label>Votre tranche marginale d'imposition</label>
+            <div class="inp"><select id="tmi"><option value="0">0 %</option><option value="0.11">11 %</option><option value="0.30" selected>30 %</option><option value="0.41">41 %</option><option value="0.45">45 %</option></select></div></div>
+        </div>
+
+        <!-- 2. Achats -->
+        <div class="pane" data-s="2">
+          <h3>Vos achats de crypto</h3>
+          <p class="hint" id="achats-hint"></p>
+          <div class="items" id="achats"></div>
+          <button class="add" onclick="add('achats')">+ Ajouter un achat</button>
+        </div>
+
+        <!-- 3. Ventes -->
+        <div class="pane" data-s="3">
+          <h3>Vos ventes en euros</h3>
+          <p class="hint">Une vente = crypto échangée contre des euros, ou utilisée pour payer un bien ou un service. <b>Les échanges crypto contre crypto ne comptent pas</b> : ne les ajoutez pas.</p>
+          <div class="items" id="ventes"></div>
+          <button class="add" onclick="add('ventes')">+ Ajouter une vente</button>
+          <div class="err" id="errors"></div>
+        </div>
+
+        <!-- 4. Résultat -->
+        <div class="pane" data-s="4">
+          <h3>Votre résultat</h3>
+          <p class="hint" id="res-sub"></p>
+          <div id="result"></div>
+          <div class="no-print" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+            <button class="btn btn-primary btn-sm" onclick="window.print()">📄 Télécharger le récapitulatif (PDF)</button>
+          </div>
+        </div>
+
+        <!-- 5. Comptes -->
+        <div class="pane" data-s="5">
+          <h3>Comptes à l'étranger (3916-bis)</h3>
+          <p class="hint">Vous avez un compte sur une plateforme établie hors de France (même sans vente, même s'il est clos dans l'année) ? Il doit être déclaré, sinon une amende par compte est possible.</p>
+          <div class="chips" id="chips"></div>
+          <div class="items" id="comptes"></div>
+          <button class="add" onclick="add('comptes')">+ Ajouter un compte</button>
+          <div id="acc-out"></div>
+        </div>
+
+        <div class="foot no-print">
+          <button class="link" id="prevBtn">← Retour</button>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="link" onclick="example()">Voir un exemple</button>
+            <button class="btn btn-primary btn-sm" id="nextBtn">Continuer →</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side no-print">
+        <div class="live">
+          <small>Impôt estimé</small>
+          <div class="big" id="l-tax">0 €</div>
+          <div class="live-row"><span>Total des ventes</span><b id="l-cess">0 €</b></div>
+          <div class="live-row"><span id="l-pvl">Plus-value nette</span><b id="l-pv">0 €</b></div>
+          <div class="live-row"><span>Impôt sur le revenu</span><b id="l-ir">0 €</b></div>
+          <div class="live-row"><span>Prélèvements sociaux</span><b id="l-ps">0 €</b></div>
+          <div id="l-badge"></div>
+        </div>
+        <div class="safe"><span style="font-size:22px">🔒</span><span><b>Vos données ne quittent pas votre appareil.</b> Aucun compte, aucune connexion à vos plateformes.</span></div>
+      </aside>
+    </div>
   </div>
 </section>
 
-<section class="card" id="ops-card">
-  <h2><span class="step">2</span>Vos opérations</h2>
-  <p class="sub"><b>Achat</b> : achat de crypto contre des euros (frais inclus). <b>Cession</b> : vente contre des euros ou paiement d'un bien/service en crypto. Les échanges crypto contre crypto ne sont pas imposables : ne les saisissez pas. La « valeur du portefeuille » est la valeur totale de <u>toutes</u> vos cryptos, sur toutes les plateformes, juste avant la cession.</p>
-  <div class="scroll">
-  <table class="ops">
-    <thead><tr><th>Type</th><th>Date</th><th>Montant achat (€)</th><th>Prix de cession (€)</th><th>Frais de cession (€)</th><th>Valeur du portefeuille (€)</th><th></th></tr></thead>
-    <tbody id="ops"></tbody>
-  </table>
+<section class="block" id="features">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Pourquoi Calqul</div><h2>Comprendre ce que vous déclarez</h2></div>
+    <div class="feat">
+      <div><div class="how-ico">📐</div><h3>Méthode officielle</h3><p>Le calcul suit la formule du formulaire 2086, ligne par ligne, avec le détail de chaque vente.</p></div>
+      <div><div class="how-ico">🧭</div><h3>Langage clair</h3><p>Pas de jargon : chaque champ est expliqué, avec des exemples concrets.</p></div>
+      <div><div class="how-ico">🛡️</div><h3>Anonyme</h3><p>Pas d'inscription, pas de clé API, pas de serveur. Tout se passe dans votre navigateur.</p></div>
+    </div>
   </div>
-  <div class="btns">
-    <button class="b2" onclick="addOp('achat')">+ Achat</button>
-    <button class="b2" onclick="addOp('cession')">+ Cession</button>
-    <button class="b3" onclick="example()">Charger un exemple</button>
-    <button class="b3" onclick="resetAll()">Tout effacer</button>
+</section>
+
+<section class="block" id="faq">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">FAQ</div><h2>Questions fréquentes</h2></div>
+    <div class="faq">
+      <details><summary>Comment est calculée la plus-value ?</summary><p>Pour chaque vente : plus-value = prix de vente net − capital investi × (prix de vente ÷ valeur totale du portefeuille). C'est la formule de la ligne 224 du 2086. Après chaque vente, la part du capital utilisée est retirée pour les ventes suivantes.</p></details>
+      <details><summary>Qu'est-ce que la « valeur du portefeuille » ?</summary><p>La valeur totale en euros de toutes vos cryptos, sur toutes vos plateformes et portefeuilles, juste avant la vente. Vous la trouvez sur l'historique de vos plateformes ou en multipliant vos quantités par le cours du jour.</p></details>
+      <details><summary>Où reporter le résultat ?</summary><p>Le total net va sur la déclaration 2042-C : case 3AN pour une plus-value, case 3BN pour une moins-value. Le détail de chaque vente se recopie sur le formulaire 2086.</p></details>
+      <details><summary>Je n'ai vendu que pour une petite somme</summary><p>Si le total de vos ventes de l'année ne dépasse pas 305 €, la plus-value est exonérée. Vos comptes à l'étranger doivent tout de même être déclarés (3916-bis).</p></details>
+      <details><summary>Les moins-values sont-elles reportables ?</summary><p>Non. Une moins-value sur crypto ne compense que les plus-values crypto de la même année.</p></details>
+      <details><summary>Mes données sont-elles envoyées quelque part ?</summary><p>Non. Le calcul est fait dans votre navigateur. Vos saisies sont seulement gardées sur votre appareil pour ne pas les perdre si vous rechargez la page.</p></details>
+    </div>
   </div>
-  <div id="errors" class="err"></div>
 </section>
 
-<section class="card" id="result-card">
-  <h2><span class="step">3</span>Résultat de la simulation</h2>
-  <p class="sub" id="res-sub"></p>
-  <div class="summary" id="summary"></div>
-  <div id="decl"></div>
-  <div id="cessions"></div>
-  <div class="btns"><button class="b1" onclick="window.print()">Imprimer / enregistrer en PDF</button></div>
-</section>
-
-<section class="card" id="f3916">
-  <h2><span class="step">4</span>Comptes à l'étranger (3916-bis)</h2>
-  <p class="sub">Tout compte d'actifs numériques ouvert, détenu, utilisé ou clos pendant l'année auprès d'une plateforme établie hors de France doit être déclaré, même s'il n'y a eu aucune vente. L'absence de déclaration peut entraîner une amende par compte. Les informations ci-dessous figurent dans les paramètres de votre compte ou les conditions générales de la plateforme.</p>
-  <div id="accounts"></div>
-  <div class="btns no-print"><button class="b2" onclick="addAcc()">+ Ajouter un compte</button></div>
-  <div id="acc-out"></div>
-</section>
-
-<section class="card faq" id="faq">
-  <h2>Questions fréquentes</h2>
-  <details><summary>Comment est calculée la plus-value ?</summary><p>Pour chaque cession : plus-value = prix de cession net − prix total d'acquisition net × (prix de cession ÷ valeur globale du portefeuille). C'est la formule de la ligne 224 du formulaire 2086. Après chaque cession, la part du capital utilisée (« fraction imputée ») est retirée pour les cessions suivantes.</p></details>
-  <details><summary>Où reporter le résultat ?</summary><p>Le total net est reporté sur la déclaration 2042-C : case 3AN en cas de plus-value, case 3BN en cas de moins-value. Le détail de chaque cession est reporté sur le formulaire 2086.</p></details>
-  <details><summary>Que se passe-t-il si mes ventes sont faibles ?</summary><p>Si le total des prix de cession de l'année ne dépasse pas 305 €, les plus-values sont exonérées. Cela ne dispense pas de déclarer vos comptes étrangers (3916-bis).</p></details>
-  <details><summary>Les moins-values sont-elles reportables ?</summary><p>Non. Une moins-value nette sur actifs numériques ne s'impute que sur les plus-values de même nature de la même année ; elle n'est pas reportable sur les années suivantes.</p></details>
-  <details><summary>Mes données sont-elles envoyées quelque part ?</summary><p>Non. Le calcul est réalisé dans votre navigateur. Vos saisies sont seulement gardées sur votre appareil pour ne pas les perdre en rechargeant la page.</p></details>
-</section>
-
-<div class="note"><b>Avertissement.</b> Calqul est un outil de simulation fourni à titre informatif. Il ne constitue ni un conseil fiscal ou juridique, ni une déclaration officielle. Les résultats dépendent entièrement des informations que vous saisissez. Les taux utilisés sont indicatifs et doivent être vérifiés sur impots.gouv.fr. En cas de situation complexe (minage, staking, DeFi, activité habituelle), consultez un professionnel.</div>
-</main>
-
-<footer><div class="wrap"><b>CALQUL</b> · Simulateur indépendant, non affilié à l'administration fiscale. Vous restez seul responsable de votre déclaration.</div></footer>
+<div class="wrap">
+  <div class="cta no-print"><div><h2>Prêt à simuler votre 2086 ?</h2><p>Gratuit, anonyme, en quelques minutes.</p></div><a class="btn btn-white" href="#simulateur">Commencer →</a></div>
+  <p class="legal">Calqul est un outil de simulation fourni à titre informatif. Il ne constitue ni un conseil fiscal ou juridique, ni une déclaration officielle. Les résultats dépendent des informations saisies ; les taux sont indicatifs et à vérifier sur impots.gouv.fr. Pour une situation complexe (minage, staking, DeFi, activité habituelle), consultez un professionnel.</p>
+</div>
+<footer><div class="wrap"><span><b>CALQUL</b> · Simulateur indépendant, non affilié à l'administration fiscale.</span><span>Vous restez seul responsable de votre déclaration.</span></div></footer>
 
 <script>
-// Prélèvements sociaux par année de cession (indicatif, à vérifier chaque année)
+// Taux par année de cession (indicatif, à vérifier chaque année)
 const RATES = { 2025:{ir:0.128, ps:0.172}, 2026:{ir:0.128, ps:0.186} };
 const EXEMPT = 305;
 const $ = id => document.getElementById(id);
-const eur = n => (Math.round(n)).toLocaleString('fr-FR') + ' €';
-const num = v => { const n = parseFloat(String(v).replace(',', '.')); return isFinite(n) ? n : 0; };
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const eur = n => Math.round(n).toLocaleString('fr-FR') + ' €';
+const num = v => { const n = parseFloat(String(v ?? '').replace(',', '.')); return isFinite(n) ? n : 0; };
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const frDate = d => d ? d.split('-').reverse().join('/') : '';
+const radio = n => document.querySelector(`input[name="${n}"]:checked`).value;
 
-let ops = [], accs = [];
+const data = { achats:[], ventes:[], comptes:[] };
+let step = 1;
+
+const FIELDS = {
+  achats: [['date','Date','date'],['montant','Montant investi (frais inclus)','eur','Le montant total payé en euros, frais compris.']],
+  ventes: [['date','Date de la vente','date'],['prix','Montant reçu','eur','Le prix de vente en euros, avant déduction des frais.'],
+           ['frais','Frais de la vente','eur','Les frais prélevés par la plateforme sur cette vente.'],
+           ['valeur','Valeur du portefeuille','eur','La valeur totale de toutes vos cryptos, toutes plateformes confondues, juste avant cette vente.']],
+  comptes: [['nom','Nom de la plateforme','text'],['pays','Pays de la plateforme','text'],['adresse','Adresse de la plateforme','text'],
+            ['id','Identifiant du compte','text','Votre numéro de compte, identifiant ou adresse email de connexion.'],['ouverture','Date d\'ouverture','date'],['cloture','Date de clôture (si clos)','date']]
+};
+const LABEL = { achats:'Achat', ventes:'Vente', comptes:'Compte' };
+
+function render(kind){
+  const el = $(kind);
+  if(!data[kind].length){
+    el.innerHTML = `<div class="empty">${kind==='achats'?'Aucun achat pour l\'instant.':kind==='ventes'?'Aucune vente pour l\'instant.':'Aucun compte ajouté. Utilisez un raccourci ci-dessus ou ajoutez-le manuellement.'}</div>`;
+    return;
+  }
+  el.innerHTML = data[kind].map((it,i) => {
+    const f = FIELDS[kind];
+    const grid = kind==='ventes' ? 'row2' : kind==='achats' ? 'row2' : 'row3';
+    return `<div class="item"><div class="item-head"><b><span class="dot"></span>${LABEL[kind]} ${i+1}</b><button class="del" onclick="data.${kind}.splice(${i},1);render('${kind}');calc()">Supprimer</button></div>
+      <div class="${grid}">${f.map(([k,l,t,tip]) => `<div class="field"><label>${l}${tip?` <span class="tip" tabindex="0" data-t="${esc(tip)}">?</span>`:''}</label>
+        <div class="inp ${t==='eur'?'eur':''}"><input ${t==='date'?'type="date"':t==='eur'?'type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"':'type="text"'} value="${esc(it[k])}" oninput="data.${kind}[${i}].${k}=this.value;calc()"></div></div>`).join('')}</div></div>`;
+  }).join('');
+}
+function add(kind, init={}){
+  data[kind].push({...init}); render(kind); calc();
+  const items = $(kind).querySelectorAll('.item'); const last = items[items.length-1];
+  last?.querySelector(init.nom ? 'input:nth-child(1)' : 'input')?.focus();
+}
 
 function save(){
-  try{ localStorage.setItem('calqul', JSON.stringify({ops, accs,
-    p:{year:$('year').value, acq0:$('acq0').value, imp0:$('imp0').value, regime:$('regime').value, tmi:$('tmi').value}})); }catch(e){}
+  try{ localStorage.setItem('calqul2', JSON.stringify({data, p:{year:$('year').value, acq0:$('acq0').value, imp0:$('imp0').value, tmi:$('tmi').value, first:radio('first'), regime:radio('regime')}})); }catch(e){}
 }
 function load(){
   try{
-    const d = JSON.parse(localStorage.getItem('calqul') || 'null'); if(!d) return;
-    ops = d.ops || []; accs = d.accs || [];
-    for(const k in d.p) if($(k)) $(k).value = d.p[k];
+    const d = JSON.parse(localStorage.getItem('calqul2') || 'null'); if(!d) return;
+    Object.assign(data, d.data);
+    ['year','acq0','imp0','tmi'].forEach(k => { if(d.p[k] != null) $(k).value = d.p[k]; });
+    document.querySelector(`input[name="first"][value="${d.p.first}"]`).checked = true;
+    document.querySelector(`input[name="regime"][value="${d.p.regime}"]`).checked = true;
   }catch(e){}
 }
 
-function renderOps(){
-  $('ops').innerHTML = ops.map((o,i) => {
-    const f = (k,ph) => `<input type="number" min="0" step="0.01" value="${esc(o[k]||'')}" placeholder="${ph}" oninput="ops[${i}].${k}=this.value;calc()">`;
-    const isC = o.type === 'cession';
-    return `<tr class="${isC?'cess':''}">
-      <td><select onchange="ops[${i}].type=this.value;renderOps();calc()"><option value="achat"${!isC?' selected':''}>Achat</option><option value="cession"${isC?' selected':''}>Cession</option></select></td>
-      <td><input type="date" value="${esc(o.date||'')}" oninput="ops[${i}].date=this.value;calc()"></td>
-      ${isC ? `<td class="na">—</td><td>${f('prix','0')}</td><td>${f('frais','0')}</td><td>${f('valeur','0')}</td>`
-            : `<td>${f('montant','0')}</td><td class="na">—</td><td class="na">—</td><td class="na">—</td>`}
-      <td><button class="b3" title="Supprimer" onclick="ops.splice(${i},1);renderOps();calc()">✕</button></td></tr>`;
-  }).join('') || '<tr><td colspan="7" style="color:var(--muted);padding:14px 6px">Aucune opération. Ajoutez vos achats et cessions de l\'année.</td></tr>';
-}
-function addOp(type){ ops.push({type, date:'', montant:'', prix:'', frais:'', valeur:''}); renderOps(); calc(); }
-
 function calc(){
   const year = $('year').value, R = RATES[year];
-  $('tmi-box').hidden = $('regime').value !== 'bareme';
-  let acq = num($('acq0').value), imp = num($('imp0').value);
-  const errs = [], rows = [];
-  // Ordre chronologique ; à date égale, les achats passent avant les cessions
-  const sorted = ops.map((o,i)=>({...o,i})).sort((a,b) =>
-    (a.date||'9999').localeCompare(b.date||'9999') || (a.type==='achat'?-1:1) - (b.type==='achat'?-1:1));
+  const first = radio('first') === '1', regime = radio('regime');
+  $('prev').hidden = first; $('tmi-box').hidden = regime !== 'bareme';
+  $('achats-hint').innerHTML = first
+    ? 'Ajoutez <b>tous</b> vos achats de crypto en euros depuis le début, jusqu\'à votre dernière vente de l\'année (toutes plateformes). Les achats faits après votre dernière vente ne changent pas le résultat.'
+    : `Ajoutez vos achats de crypto en euros réalisés en ${year}. Ceux des années précédentes sont déjà inclus dans le prix total d'acquisition de l'étape 1.`;
 
-  for(const o of sorted){
-    const n = o.i + 1;
-    if(o.date && !o.date.startsWith(year)) errs.push(`Ligne ${n} : la date n'est pas en ${year}.`);
-    if(o.type === 'achat'){ acq += num(o.montant); continue; }
-    const p = num(o.prix), fr = num(o.frais), v = num(o.valeur);
+  let acq = first ? 0 : num($('acq0').value), imp = first ? 0 : num($('imp0').value);
+  const errs = [], rows = [];
+  const ev = [...data.achats.map((o,i)=>({...o,t:'a',i})), ...data.ventes.map((o,i)=>({...o,t:'v',i}))]
+    .sort((a,b) => (a.date||'9999').localeCompare(b.date||'9999') || (a.t==='a'?-1:1) - (b.t==='a'?-1:1));
+
+  for(const o of ev){
+    if(o.t === 'a'){ acq += num(o.montant); continue; }
+    const p = num(o.prix), fr = num(o.frais), v = num(o.valeur), n = o.i + 1;
     if(!p) continue;
-    if(!o.date) errs.push(`Ligne ${n} : date de cession manquante.`);
-    if(v < p){ errs.push(`Ligne ${n} : la valeur du portefeuille doit être au moins égale au prix de cession.`); continue; }
-    const net = acq - imp;
-    const frac = net * p / v;
-    const pv = (p - fr) - frac;
+    if(!o.date) errs.push(`Vente ${n} : indiquez la date.`);
+    else if(!o.date.startsWith(year)) errs.push(`Vente ${n} : la date n'est pas en ${year}.`);
+    if(!v){ errs.push(`Vente ${n} : indiquez la valeur du portefeuille.`); continue; }
+    if(v < p){ errs.push(`Vente ${n} : la valeur du portefeuille ne peut pas être inférieure au montant vendu.`); continue; }
+    const net = acq - imp, frac = net * p / v, pv = (p - fr) - frac;
     rows.push({date:o.date, v, p, fr, acq, imp, net, pv});
     imp += frac;
   }
   $('errors').innerHTML = errs.map(esc).join('<br>');
 
-  const totalCess = rows.reduce((s,r)=>s+r.p, 0);
-  const totalPV = rows.reduce((s,r)=>s+r.pv, 0);
+  const totalCess = rows.reduce((s,r)=>s+r.p, 0), totalPV = rows.reduce((s,r)=>s+r.pv, 0);
   const exempt = totalCess > 0 && totalCess <= EXEMPT;
   const base = (!exempt && totalPV > 0) ? totalPV : 0;
-  const irRate = $('regime').value === 'pfu' ? R.ir : num($('tmi').value);
+  const irRate = regime === 'pfu' ? R.ir : num($('tmi').value);
   const ir = base * irRate, ps = base * R.ps;
+  const pct = x => (x*100).toFixed(1).replace('.0','').replace('.',',') + ' %';
 
+  // Résumé en direct
+  $('l-tax').textContent = eur(ir + ps); $('l-cess').textContent = eur(totalCess);
+  $('l-pvl').textContent = totalPV < 0 ? 'Moins-value nette' : 'Plus-value nette';
+  $('l-pv').textContent = eur(Math.abs(totalPV)); $('l-ir').textContent = eur(ir); $('l-ps').textContent = eur(ps);
+  $('l-badge').innerHTML = exempt ? '<span class="live-badge">✓ Exonéré (ventes ≤ 305 €)</span>' : '';
+
+  // Résultat
   $('res-sub').textContent = rows.length
-    ? `${rows.length} cession(s) en ${year}. Taux appliqués : impôt ${(irRate*100).toFixed(1).replace('.0','')} % + prélèvements sociaux ${(R.ps*100).toFixed(1).replace('.0','')} % (indicatif).`
-    : 'Ajoutez au moins une cession pour voir le résultat.';
+    ? `${rows.length} vente(s) en ${year} · impôt ${pct(irRate)} + prélèvements sociaux ${pct(R.ps)} (taux indicatifs)`
+    : 'Ajoutez au moins une vente à l\'étape 3 pour voir votre résultat.';
+  if(!rows.length){ $('result').innerHTML = ''; save(); return; }
 
-  $('summary').innerHTML = rows.length ? `
-    <div class="kpi"><span>Total des cessions</span><b>${eur(totalCess)}</b></div>
-    <div class="kpi"><span>${totalPV>=0?'Plus-value nette':'Moins-value nette'}</span><b>${eur(Math.abs(totalPV))}</b></div>
-    <div class="kpi"><span>Impôt sur le revenu</span><b>${eur(ir)}</b></div>
-    <div class="kpi main"><span>Total estimé à payer</span><b>${eur(ir+ps)}</b></div>` : '';
+  let banner = '';
+  if(exempt) banner = `<div class="banner ok"><span>🎉</span><span>Le total de vos ventes ne dépasse pas ${EXEMPT} € : <b>vos plus-values sont exonérées</b>. Vous n'avez pas d'impôt à payer sur ces ventes.</span></div>`;
+  else if(totalPV < 0) banner = `<div class="banner info"><span>ℹ️</span><span>Vous êtes en moins-value : pas d'impôt sur ces ventes. Elle n'est pas reportable sur les années suivantes.</span></div>`;
 
-  let decl = '';
-  if(rows.length){
-    if(exempt) decl = `<div class="note">Total des cessions ≤ ${EXEMPT} € : plus-values exonérées. Vous n'avez pas d'impôt à payer sur ces cessions.</div>`;
-    else if(totalPV >= 0) decl = `<div class="note">À reporter sur la déclaration 2042-C : <b>case 3AN = ${eur(totalPV)}</b>. Joignez le formulaire 2086 avec le détail ci-dessous.</div>`;
-    else decl = `<div class="note">À reporter sur la déclaration 2042-C : <b>case 3BN = ${eur(-totalPV)}</b>. Cette moins-value n'est pas reportable sur les années suivantes.</div>`;
-  }
-  $('decl').innerHTML = decl;
+  const boxes = `<div class="boxes">
+    <div class="box"><div class="code">2086</div><div><span>Formulaire à joindre</span><b>${rows.length} vente(s)</b></div></div>
+    <div class="box"><div class="code">${totalPV>=0?'3AN':'3BN'}</div><div><span>Case de la déclaration 2042-C</span><b>${eur(Math.abs(totalPV))}</b></div></div></div>`;
 
-  $('cessions').innerHTML = rows.map((r,k) => {
-    const L = [
-      ['211','Valeur globale du portefeuille au moment de la cession', r.v],
-      ['212','Prix de cession', r.p],
-      ['213','Frais de cession', r.fr],
-      ['214','Prix de cession net des frais', r.p - r.fr],
-      ['215','Soulte reçue ou versée', 0],
-      ['216','Prix de cession net des soultes', r.p],
-      ['217','Prix de cession net des frais et soultes', r.p - r.fr],
-      ['220','Prix total d\'acquisition', r.acq],
-      ['221','Fractions de capital initial déjà imputées', r.imp],
-      ['222','Soultes reçues lors d\'échanges antérieurs', 0],
-      ['223','Prix total d\'acquisition net', r.net],
-    ];
-    return `<div class="cession"><h3>Cession n° ${k+1}${r.date ? ' — ' + r.date.split('-').reverse().join('/') : ''}</h3>
-      <table class="lines">${L.map(l=>`<tr><td>${l[0]}</td><td>${l[1]}</td><td>${eur(l[2])}</td></tr>`).join('')}
-      <tr class="res"><td>224</td><td>${r.pv>=0?'Plus-value':'Moins-value'}</td><td>${r.pv<0?'− ':''}${eur(Math.abs(r.pv))}</td></tr></table></div>`;
+  const ces = rows.map((r,k) => {
+    const L = [['211','Valeur globale du portefeuille',r.v],['212','Prix de cession',r.p],['213','Frais de cession',r.fr],
+      ['214','Prix de cession net des frais',r.p-r.fr],['215','Soulte reçue ou versée',0],['216','Prix de cession net des soultes',r.p],
+      ['217','Prix de cession net des frais et soultes',r.p-r.fr],['220','Prix total d\'acquisition',r.acq],
+      ['221','Fractions de capital initial déjà imputées',r.imp],['222','Soultes reçues lors d\'échanges antérieurs',0],['223','Prix total d\'acquisition net',r.net]];
+    return `<details class="ces"${k===0?' open':''}><summary><span>Vente ${k+1}<em>${frDate(r.date)}</em></span><span class="pv ${r.pv>=0?'pos':'neg'}">${r.pv>=0?'+':'−'} ${eur(Math.abs(r.pv))}</span></summary>
+      <table class="lines">${L.map(l=>`<tr><td><span>${l[0]}</span></td><td>${l[1]}</td><td>${eur(l[2])}</td></tr>`).join('')}
+      <tr class="res"><td><span>224</span></td><td>${r.pv>=0?'Plus-value':'Moins-value'}</td><td>${r.pv<0?'− ':''}${eur(Math.abs(r.pv))}</td></tr></table></details>`;
   }).join('');
+
+  $('result').innerHTML = `${banner}
+    <div class="res-hero">
+      <div class="kpi"><span>${totalPV>=0?'Plus-value nette':'Moins-value nette'}</span><b>${eur(Math.abs(totalPV))}</b></div>
+      <div class="kpi"><span>Impôt + prélèvements</span><b>${eur(ir)} + ${eur(ps)}</b></div>
+      <div class="kpi hl"><span>Total estimé</span><b>${eur(ir+ps)}</b></div></div>
+    ${boxes}
+    <p style="font-weight:700;margin:0 0 10px">Détail à recopier sur le formulaire 2086</p>${ces}`;
   save();
 }
 
-function renderAccs(){
-  const fields = [['nom','Nom de la plateforme','ex. Binance'],['pays','Pays d\'établissement',''],['adresse','Adresse de la plateforme',''],
-    ['id','Identifiant / email du compte',''],['ouverture','Date d\'ouverture','date'],['cloture','Date de clôture (si clos)','date']];
-  $('accounts').innerHTML = accs.map((a,i) => `<div class="acc"><button class="b3 no-print" onclick="accs.splice(${i},1);renderAccs()">✕</button>
-    <div class="grid">${fields.map(([k,l,ph]) => `<div><label>${l}</label><input ${ph==='date'?'type="date"':`placeholder="${ph}"`} value="${esc(a[k]||'')}" oninput="accs[${i}].${k}=this.value;outAccs()"></div>`).join('')}</div></div>`).join('');
-  outAccs();
-}
-function addAcc(){ accs.push({}); renderAccs(); }
+// 3916-bis
+const EXCHANGES = ['Binance','Coinbase','Kraken','Bitpanda','Crypto.com','Bitstamp','Bybit','OKX'];
+$('chips').innerHTML = EXCHANGES.map(n => `<button class="chip" onclick="add('comptes',{nom:'${n}'})">+ ${n}</button>`).join('');
 function outAccs(){
-  const list = accs.filter(a => a.nom);
-  $('acc-out').innerHTML = list.length ? `<p class="sub" style="margin-top:16px">Récapitulatif à recopier dans le formulaire 3916-bis (un formulaire par compte) et cochez la <b>case 8UU</b> de la déclaration 2042 :</p>
+  const list = data.comptes.filter(a => a.nom);
+  $('acc-out').innerHTML = list.length ? `<p style="margin:22px 0 8px;font-weight:700">À recopier sur le formulaire 3916-bis (un par compte)</p>
+    <p class="hint" style="margin:0 0 10px">Cochez aussi la <b>case 8UU</b> de votre déclaration 2042. Vérifiez l'adresse et le pays dans les conditions générales de la plateforme.</p>
     <div class="out">${list.map((a,k)=>esc(`Compte ${k+1}
-  Désignation du gestionnaire : ${a.nom}
+  Désignation de l'organisme : ${a.nom}
   Pays : ${a.pays||'—'}
   Adresse : ${a.adresse||'—'}
   Identifiant du compte : ${a.id||'—'}
-  Date d'ouverture : ${a.ouverture?a.ouverture.split('-').reverse().join('/'):'—'}
-  Date de clôture : ${a.cloture?a.cloture.split('-').reverse().join('/'):'—'}
+  Date d'ouverture : ${frDate(a.ouverture)||'—'}
+  Date de clôture : ${frDate(a.cloture)||'—'}
   Usage : personnel`)).join('\n\n')}</div>` : '';
-  save();
 }
+
+// Navigation
+function go(n){
+  step = Math.max(1, Math.min(5, n));
+  document.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', +p.dataset.s === step));
+  document.querySelectorAll('#stepper button').forEach(b => { const s = +b.dataset.go; b.classList.toggle('on', s===step); b.classList.toggle('done', s<step); b.querySelector('i').textContent = s<step ? '✓' : s; });
+  $('prevBtn').style.visibility = step === 1 ? 'hidden' : 'visible';
+  $('nextBtn').textContent = step === 3 ? 'Voir mon résultat →' : step === 4 ? 'Comptes étrangers →' : step === 5 ? 'Terminé ✓' : 'Continuer →';
+}
+$('stepper').addEventListener('click', e => { const b = e.target.closest('button'); if(b) go(+b.dataset.go); });
+$('prevBtn').onclick = () => go(step - 1);
+$('nextBtn').onclick = () => {
+  if(step === 5){ document.getElementById('simulateur').scrollIntoView(); return; }
+  go(step + 1); document.getElementById('simulateur').scrollIntoView({block:'start'});
+};
 
 function example(){
-  $('year').value = '2025'; $('acq0').value = 0; $('imp0').value = 0;
-  ops = [
-    {type:'achat', date:'2025-01-10', montant:'2000'},
-    {type:'achat', date:'2025-03-05', montant:'1000'},
-    {type:'cession', date:'2025-06-20', prix:'1500', frais:'15', valeur:'5000'},
-    {type:'cession', date:'2025-11-02', prix:'1000', frais:'10', valeur:'4200'},
-  ];
-  renderOps(); calc();
-}
-function resetAll(){
-  if(!confirm('Effacer toutes les saisies ?')) return;
-  ops = []; accs = []; $('acq0').value = 0; $('imp0').value = 0; renderOps(); renderAccs(); calc();
+  $('year').value = '2025';
+  document.querySelector('input[name="first"][value="1"]').checked = true;
+  document.querySelector('input[name="regime"][value="pfu"]').checked = true;
+  data.achats = [{date:'2025-01-10', montant:'2000'},{date:'2025-03-05', montant:'1000'}];
+  data.ventes = [{date:'2025-06-20', prix:'1500', frais:'15', valeur:'5000'},{date:'2025-11-02', prix:'1000', frais:'10', valeur:'4200'}];
+  render('achats'); render('ventes'); calc(); go(4);
 }
 
-['year','acq0','imp0','regime','tmi'].forEach(id => $(id).addEventListener('input', calc));
-load(); renderOps(); renderAccs(); calc();
+document.addEventListener('input', e => { if(e.target.closest('[data-s="1"]')) calc(); if(e.target.closest('#comptes')){ outAccs(); save(); } });
+document.addEventListener('change', e => { if(e.target.closest('[data-s="1"]')) calc(); });
+const _render = render; render = k => { _render(k); if(k==='comptes'){ outAccs(); save(); } };
+
+load(); ['achats','ventes','comptes'].forEach(render); calc(); go(1);
 </script>
 </body>
 </html>
