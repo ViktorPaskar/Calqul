@@ -247,6 +247,26 @@ details.ces[open] summary{border-bottom:1px solid var(--line)}
 .lines tr.res td{background:rgba(59,130,246,.07);font-weight:600;color:var(--text)}
 .out{white-space:pre-wrap;background:var(--bg2);border:1px solid var(--line2);border-radius:16px;padding:18px;font:13.5px/1.75 ui-monospace,Consolas,monospace;color:#C9D2E3}
 
+.carry{margin-top:22px;border:1px dashed rgba(124,180,255,.35);border-radius:18px;padding:18px;background:rgba(59,130,246,.04)}
+.carry p{margin:0 0 12px;color:var(--muted);font-size:14px}
+.carry p b{color:var(--text);font-weight:500}
+.carry .boxes{margin:0}
+.mini-link{border:0;background:none;color:var(--blue2);font-size:13.5px;padding:0;margin:-6px 0 16px;display:inline-flex;align-items:center;gap:6px}
+.mini-link:hover{color:#fff}
+.helper{border:1px solid var(--line2);border-radius:14px;padding:14px;margin:0 0 16px;background:var(--card)}
+.helper p{margin:0 0 10px;font-size:13.5px;color:var(--muted)}
+.h-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 32px;gap:8px;margin-bottom:8px;align-items:center}
+.h-row input{height:42px;font-size:14px}
+.h-sum{display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-size:14px}
+.h-sum b{font:500 18px "Inter Tight",sans-serif}
+.cases{margin:0 0 22px;border:1px solid var(--line);border-radius:16px;background:var(--bg2)}
+.cases summary{list-style:none;cursor:pointer;padding:14px 18px;font-size:14.5px;font-weight:500;display:flex;justify-content:space-between}
+.cases summary::-webkit-details-marker{display:none}
+.cases summary::after{content:"+";color:var(--muted)}
+.cases[open] summary::after{content:"−"}
+.cases ul{margin:0;padding:0 18px 16px 34px;color:var(--muted);font-size:14px}
+.cases li{margin-bottom:8px}.cases li b{color:var(--text);font-weight:500}
+@media (max-width:760px){.h-row{grid-template-columns:1fr 1fr 32px}.h-row input:first-child{grid-column:span 3}}
 /* FAQ */
 .faq{max-width:820px;margin:0 auto}
 .faq details{border-bottom:1px solid var(--line)}
@@ -372,6 +392,12 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <div class="pane" data-s="3">
           <h3>Vos ventes en euros</h3>
           <p class="hint">Une vente = crypto échangée contre des euros, ou utilisée pour payer un bien ou un service. <b>Les échanges crypto contre crypto ne comptent pas</b> : ne les ajoutez pas.</p>
+          <details class="cases"><summary>Cas particuliers : staking, airdrops, stablecoins…</summary><ul>
+            <li><b>Échange contre un stablecoin</b> (USDT, USDC…) : c'est un échange crypto contre crypto, il n'est pas imposable. Seule la conversion en euros compte.</li>
+            <li><b>Paiement d'un bien ou d'un service en crypto</b> : c'est une vente. Indiquez la valeur en euros du bien payé.</li>
+            <li><b>Cryptos reçues gratuitement</b> (airdrop, staking, parrainage) : en règle générale, elles n'augmentent pas votre prix d'acquisition (0 €), sauf si elles ont été imposées à leur réception. Leur valeur compte bien dans la valeur du portefeuille.</li>
+            <li><b>Minage, trading très fréquent, DeFi complexe</b> : d'autres règles peuvent s'appliquer (BNC, BIC). Ce simulateur ne couvre pas ces cas.</li>
+          </ul></details>
           <div class="items" id="ventes"></div>
           <button class="add" onclick="add('ventes')">+ Ajouter une vente</button>
           <div class="err" id="errors"></div>
@@ -501,7 +527,32 @@ function render(kind){
   else el.innerHTML = data[kind].map((it,i) => `<div class="item"><div class="item-head"><b><span class="dot"></span>${LABEL[kind]} ${i+1}</b><button class="del" onclick="data.${kind}.splice(${i},1);render('${kind}');calc()">Supprimer</button></div>
       <div class="${kind==='comptes'?'row3':'row2'}">${FIELDS[kind].map(([k,l,t,tip]) => `<div class="field"><label>${l}${tip?` <span class="tip" tabindex="0" data-t="${esc(tip)}">?</span>`:''}</label>
         <div class="inp ${t==='eur'?'eur':''}"><input ${t==='date'?'type="date"':t==='eur'?'type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"':'type="text"'} value="${esc(it[k])}" oninput="data.${kind}[${i}].${k}=this.value;calc()"></div></div>`).join('')}</div></div>`).join('');
+  if(kind === 'ventes') data.ventes.forEach((v,i) => {
+    const item = el.children[i]; if(!item) return;
+    item.insertAdjacentHTML('beforeend', `<button class="mini-link" onclick="toggleHelper(${i})">${v.hOpen ? 'Masquer le calcul' : 'Je ne connais pas la valeur de mon portefeuille'}</button><div id="h${i}"></div>`);
+    if(v.hOpen) renderHelper(i);
+  });
   if(kind === 'comptes') outAccs();
+}
+function toggleHelper(i){ const v = data.ventes[i]; v.hOpen = !v.hOpen; if(v.hOpen && !v.h) v.h = [{},{}]; render('ventes'); }
+function renderHelper(i){
+  const v = data.ventes[i];
+  $('h'+i).innerHTML = `<div class="helper"><p>Listez toutes vos cryptos détenues juste avant la vente, sur toutes vos plateformes et portefeuilles, avec leur cours en euros ce jour-là.</p>
+    ${v.h.map((r,k) => `<div class="h-row inp"><input placeholder="Crypto (ex. BTC)" value="${esc(r.n)}" oninput="data.ventes[${i}].h[${k}].n=this.value;save()">
+      <input type="number" inputmode="decimal" placeholder="Quantité" value="${esc(r.q)}" oninput="data.ventes[${i}].h[${k}].q=this.value;helperSum(${i})">
+      <input type="number" inputmode="decimal" placeholder="Cours (€)" value="${esc(r.c)}" oninput="data.ventes[${i}].h[${k}].c=this.value;helperSum(${i})">
+      <button class="del" onclick="data.ventes[${i}].h.splice(${k},1);renderHelper(${i});helperSum(${i})">✕</button></div>`).join('')}
+    <button class="mini-link" style="margin:4px 0 0" onclick="data.ventes[${i}].h.push({});renderHelper(${i})">+ Ajouter une crypto</button>
+    <div class="h-sum"><span>Valeur du portefeuille</span><b id="hs${i}">0 €</b></div></div>`;
+  helperSum(i, true);
+}
+function helperSum(i, silent){
+  const v = data.ventes[i], sum = v.h.reduce((t,r) => t + num(r.q) * num(r.c), 0);
+  if($('hs'+i)) $('hs'+i).textContent = eur(sum);
+  if(silent && !sum) return;
+  v.valeur = sum ? String(Math.round(sum*100)/100) : '';
+  const inp = $('ventes').children[i]?.querySelectorAll('.row2 input')[3]; if(inp) inp.value = v.valeur;
+  calc();
 }
 function add(kind, init={}){
   data[kind].push({...init}); render(kind); calc();
@@ -589,7 +640,11 @@ function calc(){
     <div class="boxes">
       <div class="box"><div class="code">2086</div><div><span>Formulaire à joindre</span><b>${rows.length} vente(s)</b></div></div>
       <div class="box"><div class="code">${totalPV>=0?'3AN':'3BN'}</div><div><span>Case de la déclaration 2042-C</span><b>${eur(Math.abs(totalPV))}</b></div></div></div>
-    <p class="sub-t">Détail à recopier sur le formulaire 2086</p>${ces}`;
+    <p class="sub-t">Détail à recopier sur le formulaire 2086</p>${ces}
+    ${regime === 'bareme' ? `<div class="banner info" style="margin-top:16px">${icon('info')}<span>Option pour le barème : cochez la <b>case 2OP</b> de la déclaration 2042. Elle s'applique à tous vos revenus de placement de l'année (dividendes, intérêts…), pas seulement à la crypto.</span></div>` : ''}
+    <div class="carry"><p><b>À conserver pour votre déclaration de ${+year+1}.</b> Ces deux montants vous seront demandés à l'étape 1 l'an prochain (réponse « Non »).</p>
+      <div class="boxes"><div class="box"><div class="code">220</div><div><span>Prix total d'acquisition</span><b>${eur(acq)}</b></div></div>
+      <div class="box"><div class="code">221</div><div><span>Capital déjà utilisé</span><b>${eur(imp)}</b></div></div></div></div>`;
   save();
 }
 
