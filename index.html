@@ -109,7 +109,6 @@ button{font:inherit;cursor:pointer;color:inherit}
 .mq-in{display:flex;gap:64px;width:max-content;animation:mq 30s linear infinite}
 .mq-in{align-items:center}
 .mq-in img{height:26px;width:auto;filter:brightness(0) invert(1);opacity:.5;transition:opacity .3s}
-.mq-in img.nobg{filter:grayscale(1) invert(1) brightness(1.5);mix-blend-mode:screen}
 .mq-in img:hover{opacity:.9}
 .mq-in span{font:500 22px "Inter Tight",sans-serif;color:#4A5161;letter-spacing:-.01em}
 @keyframes mq{to{transform:translateX(-50%)}}
@@ -632,7 +631,7 @@ function calc(){
 const EXCHANGES = ['Binance','Coinbase','Kraken','Bitpanda','Crypto.com','Bitstamp','Bybit','OKX'];
 $('chips').innerHTML = EXCHANGES.map(n => `<button class="chip" onclick="add('comptes',{nom:'${n}'})">+ ${n}</button>`).join('');
 // Logos des plateformes (fichiers dans /logos), sinon le nom en texte
-const LOGOS = [['Binance','binance.webp'],['Coinbase','coinbase.webp'],['Kraken','kraken.webp','nobg'],['OKX','okx.svg'],['Bybit','bybit.svg'],['Crypto.com','cryptocom.svg'],['Bitpanda'],['Bitstamp'],['KuCoin']];
+const LOGOS = [['Binance','binance.svg'],['Coinbase','coinbase.svg'],['Kraken','kraken.svg'],['OKX','okx.svg'],['Bybit','bybit.svg'],['Crypto.com','cryptocom.svg'],['Bitpanda','bitpanda.svg'],['Bitstamp','bitstamp.svg'],['KuCoin','kucoin.svg']];
 const mqItems = LOGOS.map(([n,f,c]) => f ? `<img src="logos/${f}" alt="${n}"${c?` class="${c}"`:''}>` : `<span>${n}</span>`).join('');
 $('mq').innerHTML = mqItems + mqItems;
 function outAccs(){
