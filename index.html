@@ -47,7 +47,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 .btn-lg{padding:15px 28px;font-size:16px}
 
 /* Hero */
-.hero{position:relative;padding:170px 0 0;text-align:center;overflow:hidden;isolation:isolate}
+.hero{position:relative;padding:150px 0 0;text-align:center;overflow:hidden;isolation:isolate}
 .hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .beam{position:absolute;left:50%;top:-320px;width:1100px;height:760px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(59,130,246,.42),rgba(59,130,246,.08) 60%,transparent);filter:blur(20px);animation:breathe 9s ease-in-out infinite}
 @keyframes breathe{50%{opacity:.7;transform:translateX(-50%) scale(1.06)}}
@@ -64,6 +64,8 @@ button{font:inherit;cursor:pointer;color:inherit}
 .rv.in{opacity:1;transform:none}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
 
+.hero .sim{text-align:left;margin-top:56px;scroll-margin-top:90px}
+.hero .lead{margin-bottom:22px}
 /* Product shot */
 .shot{position:relative;max-width:1000px;margin:80px auto 0;perspective:1600px}
 .shot-glow{position:absolute;inset:10% 8% -10%;background:radial-gradient(closest-side,rgba(59,130,246,.35),transparent);filter:blur(50px);z-index:-1}
@@ -320,79 +322,12 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <header class="hero">
   <div class="hero-bg" aria-hidden="true"><div class="beam"></div><div class="grid-bg"></div></div>
   <div class="wrap">
-    <div class="badge rv"><b>Nouveau</b>Simulateur 2086 · revenus 2025</div>
+    <div class="badge rv"><b>Nouveau</b>Simulateur 2086 · revenus 2026</div>
     <h1 class="rv d1"><span class="grad">Vos plus-values crypto,</span><br><span class="grad-b">calculées sans erreur.</span></h1>
     <p class="lead rv d2">Saisissez vos achats et vos ventes. Calqul applique la méthode officielle et vous indique, ligne par ligne, quoi reporter dans votre déclaration.</p>
-    <div class="cta-row rv d3">
-      <a class="btn btn-w btn-lg" href="#simulateur">Lancer la simulation <svg class="ic"><use href="#i-arrow"/></svg></a>
-      <button class="btn btn-g btn-lg" onclick="example();document.getElementById('simulateur').scrollIntoView()"><svg class="ic"><use href="#i-play"/></svg>Voir un exemple</button>
-    </div>
     <div class="hero-note rv d4"><span><svg class="ic"><use href="#i-lock"/></svg>Sans inscription</span><span><svg class="ic"><use href="#i-monitor"/></svg>Calcul dans votre navigateur</span><span><svg class="ic"><use href="#i-clock"/></svg>5 minutes</span></div>
 
-    <div class="shot rv" id="shot" aria-hidden="true">
-      <div class="shot-glow"></div>
-      <div class="app">
-        <div class="app-bar"><i></i><i></i><i></i><span>calqul · récapitulatif 2086</span></div>
-        <div class="app-body">
-          <div class="pnl">
-            <small>Plus-value nette 2025</small>
-            <div class="big-num"><span id="cnt">0</span> €</div>
-            <span class="up"><svg class="ic"><use href="#i-trend"/></svg>2 ventes · méthode officielle</span>
-            <svg class="chart" viewBox="0 0 400 120" preserveAspectRatio="none"><defs><linearGradient id="cg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3B82F6" stop-opacity=".35"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/></linearGradient></defs>
-              <path class="area" d="M0 105 C50 98 80 84 120 86 S190 58 235 62 S300 30 345 32 S390 14 400 10 V120 H0Z" fill="url(#cg)"/>
-              <path class="line" d="M0 105 C50 98 80 84 120 86 S190 58 235 62 S300 30 345 32 S390 14 400 10" fill="none" stroke="#7CB4FF" stroke-width="2.2" stroke-linecap="round"/></svg>
-          </div>
-          <div class="pnl rows">
-            <small>Formulaire 2086 · vente 1</small>
-            <div class="r"><i class="tag">211</i><span>Valeur du portefeuille</span><b>5 000 €</b></div>
-            <div class="r"><i class="tag">212</i><span>Prix de cession</span><b>1 500 €</b></div>
-            <div class="r"><i class="tag">224</i><span>Plus-value</span><b class="pos">+ 585 €</b></div>
-            <div class="case"><div><small>Case 2042-C</small><br><b>3AN</b></div><b>1 075 €</b></div>
-          </div>
-        </div>
-      </div>
-      <div class="chipf cf1"><div class="ico"><svg class="ic"><use href="#i-euro"/></svg></div><span><small>Impôt estimé</small><b>323 €</b></span></div>
-      <div class="chipf cf2"><div class="ico g"><svg class="ic"><use href="#i-check"/></svg></div><span><small>Statut</small><b>Prêt à déclarer</b></span></div>
-    </div>
-  </div>
-</header>
-
-<div class="logos">
-  <p>Déclarez vos comptes sur les principales plateformes</p>
-  <div class="mq"><div class="mq-in" id="mq"></div></div>
-</div>
-
-<section class="s" id="features">
-  <div class="wrap">
-    <div class="head rv"><span class="eyebrow">Pourquoi Calqul</span><h2 class="grad">Comprendre ce que vous déclarez.</h2><p>Un outil conçu pour la fiscalité française, sans jargon et sans compromis sur la confidentialité.</p></div>
-    <div class="bento">
-      <div class="bx c4 rv"><div class="ico"><svg class="ic"><use href="#i-scale"/></svg></div><h3>La méthode officielle, ligne par ligne</h3><p>Le calcul suit exactement la formule du formulaire 2086, avec le détail des lignes 211 à 224 pour chaque vente.</p>
-        <div class="formula">Plus-value = <em>prix de cession</em> − <em>prix d'acquisition</em> × <em>prix de cession</em> ÷ <em>valeur du portefeuille</em></div></div>
-      <div class="bx c2 rv d1"><div class="ico"><svg class="ic"><use href="#i-shield"/></svg></div><h3>100 % anonyme</h3><p>Pas d'inscription, pas de clé API, pas de serveur. Tout reste sur votre appareil.</p><div class="lockv"><svg class="ic"><use href="#i-lock"/></svg></div></div>
-      <div class="bx c3 rv"><div class="ico"><svg class="ic"><use href="#i-file"/></svg></div><h3>Les bonnes cases</h3><p>Montants prêts à recopier sur le 2086 et la déclaration 2042-C.</p>
-        <div class="mini"><div><small>Case</small><b>3AN</b></div><div><small>Case</small><b>3BN</b></div><div><small>Case</small><b>8UU</b></div></div></div>
-      <div class="bx c3 rv d1"><div class="ico"><svg class="ic"><use href="#i-globe"/></svg></div><h3>Comptes à l'étranger</h3><p>Préparez votre 3916-bis pour chaque plateforme établie hors de France, même sans vente.</p>
-        <div class="mini"><div><small>Formulaire</small><b>3916-bis</b></div><div><small>Récapitulatif</small><b>PDF</b></div></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="s" id="comment">
-  <div class="wrap">
-    <div class="head rv"><span class="eyebrow">Méthode</span><h2 class="grad">Trois étapes. Aucune connaissance fiscale.</h2></div>
-    <div class="steps">
-      <div class="st rv"><span class="n">01</span><h3>Vos achats</h3><p>Les montants investis en euros dans vos cryptos, avec leur date.</p></div>
-      <div class="st rv d1"><span class="n">02</span><h3>Vos ventes</h3><p>Le montant reçu à chaque vente et la valeur totale de votre portefeuille à ce moment.</p></div>
-      <div class="st rv d2"><span class="n">03</span><h3>Votre résultat</h3><p>Plus-value, impôt estimé et les cases exactes à remplir sur impots.gouv.fr.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="s" id="simulateur">
-  <div class="wrap">
-    <div class="head rv"><span class="eyebrow">Simulateur</span><h2 class="grad">Calculez votre plus-value.</h2><p>Vos données restent sur votre appareil. Rien n'est envoyé.</p></div>
-
-    <div class="sim">
+    <div class="sim" id="simulateur">
       <div class="panel">
         <div class="stepper" id="stepper">
           <button data-go="1"><i>1</i><span>Situation</span></button>
@@ -406,7 +341,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
           <h3>Votre situation</h3>
           <p class="hint">Quelques questions pour adapter le calcul.</p>
           <div class="field"><label>Année de vos ventes</label>
-            <div class="inp"><select id="year"><option value="2025">2025 — déclaration au printemps 2026</option><option value="2026">2026 — déclaration au printemps 2027</option></select></div></div>
+            <div class="inp"><select id="year"><option value="2026">2026 — déclaration au printemps 2027</option><option value="2025">2025 — déclaration au printemps 2026</option></select></div></div>
           <div class="field"><label>Est-ce votre première déclaration crypto ?</label></div>
           <div class="choice">
             <label><input type="radio" name="first" value="1" checked><span><b>Oui</b><small>Je n'ai jamais rempli de 2086</small></span></label>
@@ -481,6 +416,37 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       </aside>
     </div>
   </div>
+</header>
+
+<div class="logos">
+  <p>Déclarez vos comptes sur les principales plateformes</p>
+  <div class="mq"><div class="mq-in" id="mq"></div></div>
+</div>
+
+<section class="s" id="features">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">Pourquoi Calqul</span><h2 class="grad">Comprendre ce que vous déclarez.</h2><p>Un outil conçu pour la fiscalité française, sans jargon et sans compromis sur la confidentialité.</p></div>
+    <div class="bento">
+      <div class="bx c4 rv"><div class="ico"><svg class="ic"><use href="#i-scale"/></svg></div><h3>La méthode officielle, ligne par ligne</h3><p>Le calcul suit exactement la formule du formulaire 2086, avec le détail des lignes 211 à 224 pour chaque vente.</p>
+        <div class="formula">Plus-value = <em>prix de cession</em> − <em>prix d'acquisition</em> × <em>prix de cession</em> ÷ <em>valeur du portefeuille</em></div></div>
+      <div class="bx c2 rv d1"><div class="ico"><svg class="ic"><use href="#i-shield"/></svg></div><h3>100 % anonyme</h3><p>Pas d'inscription, pas de clé API, pas de serveur. Tout reste sur votre appareil.</p><div class="lockv"><svg class="ic"><use href="#i-lock"/></svg></div></div>
+      <div class="bx c3 rv"><div class="ico"><svg class="ic"><use href="#i-file"/></svg></div><h3>Les bonnes cases</h3><p>Montants prêts à recopier sur le 2086 et la déclaration 2042-C.</p>
+        <div class="mini"><div><small>Case</small><b>3AN</b></div><div><small>Case</small><b>3BN</b></div><div><small>Case</small><b>8UU</b></div></div></div>
+      <div class="bx c3 rv d1"><div class="ico"><svg class="ic"><use href="#i-globe"/></svg></div><h3>Comptes à l'étranger</h3><p>Préparez votre 3916-bis pour chaque plateforme établie hors de France, même sans vente.</p>
+        <div class="mini"><div><small>Formulaire</small><b>3916-bis</b></div><div><small>Récapitulatif</small><b>PDF</b></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="comment">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">Méthode</span><h2 class="grad">Trois étapes. Aucune connaissance fiscale.</h2></div>
+    <div class="steps">
+      <div class="st rv"><span class="n">01</span><h3>Vos achats</h3><p>Les montants investis en euros dans vos cryptos, avec leur date.</p></div>
+      <div class="st rv d1"><span class="n">02</span><h3>Vos ventes</h3><p>Le montant reçu à chaque vente et la valeur totale de votre portefeuille à ce moment.</p></div>
+      <div class="st rv d2"><span class="n">03</span><h3>Votre résultat</h3><p>Plus-value, impôt estimé et les cases exactes à remplir sur impots.gouv.fr.</p></div>
+    </div>
+  </div>
 </section>
 
 <section class="s" id="faq">
@@ -505,7 +471,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 
 <script>
 // Taux par année de cession (indicatif, à vérifier chaque année)
-const RATES = { 2025:{ir:0.128, ps:0.172}, 2026:{ir:0.128, ps:0.186} };
+const RATES = { 2025:{ir:0.128, ps:0.186}, 2026:{ir:0.128, ps:0.186} };
 const EXEMPT = 305;
 const $ = id => document.getElementById(id);
 const eur = n => Math.round(n).toLocaleString('fr-FR') + ' €';
@@ -544,11 +510,11 @@ function add(kind, init={}){
 }
 
 function save(){
-  try{ localStorage.setItem('calqul2', JSON.stringify({data, p:{year:$('year').value, acq0:$('acq0').value, imp0:$('imp0').value, tmi:$('tmi').value, first:radio('first'), regime:radio('regime')}})); }catch(e){}
+  try{ localStorage.setItem('calqul3', JSON.stringify({data, p:{year:$('year').value, acq0:$('acq0').value, imp0:$('imp0').value, tmi:$('tmi').value, first:radio('first'), regime:radio('regime')}})); }catch(e){}
 }
 function load(){
   try{
-    const d = JSON.parse(localStorage.getItem('calqul2') || 'null'); if(!d) return;
+    const d = JSON.parse(localStorage.getItem('calqul3') || 'null'); if(!d) return;
     Object.assign(data, d.data);
     ['year','acq0','imp0','tmi'].forEach(k => { if(d.p[k] != null) $(k).value = d.p[k]; });
     document.querySelector(`input[name="first"][value="${d.p.first}"]`).checked = true;
@@ -662,11 +628,11 @@ $('prevBtn').onclick = () => go(step - 1);
 $('nextBtn').onclick = () => { if(step < 5) go(step + 1); $('simulateur').scrollIntoView({block:'start'}); };
 
 function example(){
-  $('year').value = '2025';
+  $('year').value = '2026';
   document.querySelector('input[name="first"][value="1"]').checked = true;
   document.querySelector('input[name="regime"][value="pfu"]').checked = true;
-  data.achats = [{date:'2025-01-10', montant:'2000'},{date:'2025-03-05', montant:'1000'}];
-  data.ventes = [{date:'2025-06-20', prix:'1500', frais:'15', valeur:'5000'},{date:'2025-11-02', prix:'1000', frais:'10', valeur:'4200'}];
+  data.achats = [{date:'2026-01-10', montant:'2000'},{date:'2026-03-05', montant:'1000'}];
+  data.ventes = [{date:'2026-06-20', prix:'1500', frais:'15', valeur:'5000'},{date:'2026-11-02', prix:'1000', frais:'10', valeur:'4200'}];
   render('achats'); render('ventes'); calc(); go(4);
 }
 
@@ -680,7 +646,7 @@ const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting)
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
 addEventListener('scroll', () => $('top').classList.toggle('scrolled', scrollY > 20), {passive:true});
 function count(){
-  const el = $('cnt'), end = 1075, t0 = performance.now() + 300, d = 1600;
+  const el = $('cnt'); if(!el) return; const end = 1075, t0 = performance.now() + 300, d = 1600;
   const f = t => { const k = Math.min(1, Math.max(0, (t-t0)/d)); el.textContent = Math.round(end*(1-Math.pow(1-k,3))).toLocaleString('fr-FR'); if(k<1) requestAnimationFrame(f); };
   requestAnimationFrame(f);
 }
